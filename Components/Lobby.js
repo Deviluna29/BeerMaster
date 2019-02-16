@@ -10,19 +10,21 @@ class Lobby extends React.Component {
   constructor(props) {
     super(props)
     this.id = 0
-    this.name
+    this.name = ""
     this.state = {
     }
   }
 
   _addPlayer() {
-    if (this.name.length > 0 && this.id < 8) {
+      // Set the id of the player to add
       if (this.props.players[this.props.players.length - 1] != null) {
         this.id = this.props.players[this.props.players.length - 1].id + 1
       } else {
         this.id = 1
       }
-      
+
+      // Add the player if a name is selected and if player numbers < 9
+      if (this.name.length > 0 && this.id < 9) {
       player = {
         id: this.id,
         name: this.name
@@ -36,7 +38,6 @@ class Lobby extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <View style={styles.main_container}>
         <View style={styles.input_container}>

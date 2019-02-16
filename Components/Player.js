@@ -1,7 +1,14 @@
 import React from 'react'
 import { StyleSheet, TextInput, View, Text, Button } from 'react-native'
+import { connect } from 'react-redux'
 
-export default class Player extends React.Component {
+class Player extends React.Component {
+
+  _deletePlayer() {
+    const action = { type: "DELETE_PLAYER", value: this.props.player }
+    this.props.dispatch(action)
+  }
+
   render() {
     const player = this.props.player
     return (
@@ -11,8 +18,7 @@ export default class Player extends React.Component {
         <Button
           style={styles.deleteButton}
           title='Supprimer'
-          onPress={() => {}}
-          type="clear"
+          onPress={() => {this._deletePlayer()}}
           color="red"
           />
       </View>
@@ -33,3 +39,9 @@ const styles = StyleSheet.create({
     margin: 5
   }
 })
+
+const mapStateToProps = (state) => {
+  return state
+}
+
+export default connect(mapStateToProps)(Player)

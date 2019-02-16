@@ -16,9 +16,13 @@ class Lobby extends React.Component {
   }
 
   _addPlayer() {
-
     if (this.name.length > 0 && this.id < 8) {
-      this.id += 1
+      if (this.props.players[this.props.players.length - 1] != null) {
+        this.id = this.props.players[this.props.players.length - 1].id + 1
+      } else {
+        this.id = 1
+      }
+      
       player = {
         id: this.id,
         name: this.name

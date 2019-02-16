@@ -37,6 +37,10 @@ class Lobby extends React.Component {
     }
   }
 
+  _displayTheGame() {
+    this.props.navigation.navigate("Game")
+  }
+
   render() {
     return (
       <View style={styles.main_container}>
@@ -48,13 +52,14 @@ class Lobby extends React.Component {
             onChangeText={(text) => this.name = text}
             onSubmitEditing={() => {this._addPlayer()}}
           />
-          <Button style={styles.addButton} title='Ajouter' onPress={() => this._addPlayer()}/>
+          <Button style={styles.add_Button} title='Ajouter' onPress={() => this._addPlayer()}/>
         </View>
         <FlatList
           data={this.props.players}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({item}) => <Player player={item}/>}
         />
+        <Button style={styles.start_Button} title='Lancer le Jeu' onPress={() => this._displayTheGame()}/>
       </View>
     )
   }
@@ -75,7 +80,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingLeft: 5
   },
-  addButton: {
+  add_Button: {
+    flex: 1
+  },
+  start_Button: {
     flex: 1
   }
 })

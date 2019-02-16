@@ -1,6 +1,7 @@
-import { createStackNavigator, createAppContainer  } from 'react-navigation'
+import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation'
 import Home from '../Components/Home'
 import Lobby from '../Components/Lobby'
+import Game from '../Components/Game'
 
 const SearchStackNavigator = createStackNavigator({
   Home: {
@@ -13,6 +14,12 @@ const SearchStackNavigator = createStackNavigator({
     screen: Lobby,
     navigationOptions: {
       title: 'Lobby'
+    }
+  },
+  Game: {
+    screen: Game,
+    navigationOptions: {
+      header: null
     }
   }
 })

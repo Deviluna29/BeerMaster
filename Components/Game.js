@@ -1,7 +1,8 @@
 
 import React from 'react'
-import { StyleSheet, View, Text, Button } from 'react-native'
+import { StyleSheet, View, Text, Button, ImageBackground, TouchableOpacity, TextInput } from 'react-native'
 import { randomPledge } from '../helpers/pledgeHelper'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class Game extends React.Component {
 
@@ -9,7 +10,7 @@ class Game extends React.Component {
         super(props)
         this.state = {
             pledge: randomPledge(),
-            players: [{name: "Geof"}, {name: "Roro"}, {name: "Fred"}, {name: "Thierry"}, {name: "Chaturbate"}],
+            players: [{name: "Geof"}],
             currentPlayer: 0
          }
     }
@@ -23,15 +24,30 @@ class Game extends React.Component {
 
     render() {
         return (
-            <View style={{ flex: 1, alignItems: 'center', marginTop: 50}}>
-                <Text style={{borderRadius: 4, borderWidth: 2, borderColor: '#d6d7da' }}>Gage pour {this.state.players[this.state.currentPlayer].name}</Text>
-                <Text>{this.state.pledge.name}</Text>
-                <View style={{borderRadius: 4, borderWidth: 2, borderColor: '#d6d7da', flexDirection: 'row'}}>
+            <ImageBackground source={require('../assets/images/background.jpeg')} style={{width: '100%', height: '100%'}}>
+                <View style={{ flex: 1, alignItems: 'center', marginTop: 50}}>
+                    <Text style={{ borderRadius: 4, borderWidth: 2, borderColor: '#fff', backgroundColor: 'rgba(255, 255, 255, 0.5)', height: 100, width: 250 }}>Score de {this.state.players[this.state.currentPlayer].name}</Text>
                     
-                    <Button onPress={() => this._loadNewPledge()} title="OK" color="#008000" accessibilityLabel="It's OK !" />
-                    <Button onPress={() => {}} title="Non" color="#FF0000" accessibilityLabel="It's NOT OK !" />
+                    <View style={{marginTop: 50, borderRadius: 4, borderWidth: 2, borderColor: '#fff', backgroundColor: 'rgba(255, 255, 255, 0.5)', height: 420, width: 250 }}>
+                        <Text style={{ margin: 10 }}>{this.state.pledge.name} pour {this.state.players[this.state.currentPlayer].name}</Text>
+                        <View style={{ flexDirection: 'row' }}>
+                            <TouchableOpacity onPress={() => this._loadNewPledge()}  style={{flexDirection: 'row', justifyContent:'center', alignItems: 'center', marginTop: 250, marginLeft: 10, borderRadius: 4, borderWidth: 2, borderColor: '#fff', width: 100, height: 50, backgroundColor: 'rgba(180, 127, 4, 0.5)'}} >
+                                <Icon name="reddit-alien" size={20} color={'white'} />
+                                <Text style={{color: '#fff'}}>Ca gage !</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => this._loadNewPledge()}  style={{flexDirection: 'row', justifyContent:'center', alignItems: 'center', marginTop: 250, marginLeft: 25, borderRadius: 4, borderWidth: 2, borderColor: '#fff', width: 100, height: 50, backgroundColor: 'rgba(180, 89, 4, 0.5)'}} >
+                                <Icon name="glass" size={20} color={'white'} />
+                                <Text style={{color: '#fff'}}>Je bois !</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <TouchableOpacity onPress={() => this._loadNewPledge()}  style={{flexDirection: 'row', justifyContent:'center', alignItems: 'center', marginTop: 20, marginLeft: 80, borderRadius: 4, borderWidth: 2, borderColor: '#fff', width: 100, height: 50, backgroundColor: 'rgba(98, 4, 180, 0.5)'}} >
+                                <Icon name="superpowers" size={20} color={'white'} />
+                                <Text style={{color: '#fff'}}>Combo !!!</Text>
+                            </TouchableOpacity>
+                    </View>
                 </View>
-            </View>
+            </ImageBackground>
         )
     }
 }

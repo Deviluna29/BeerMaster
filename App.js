@@ -7,7 +7,9 @@ import Game from './Components/Game'
 export default class App extends React.Component {
   render() {
     return (
-      <Navigation/>
+      <Provider store={Store}>
+        <Navigation/>
+      </Provider>
     );
   }
 }

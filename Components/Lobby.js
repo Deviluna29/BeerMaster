@@ -1,51 +1,52 @@
 import React from 'react'
 import { StyleSheet, TextInput, View, FlatList, Button } from 'react-native'
 import Player from './Player'
+import { connect } from 'react-redux'
 
-export default class Lobby extends React.Component {
+class Lobby extends React.Component {
 
 
 
   constructor(props) {
     super(props)
     this.id = 0
-    this.name = ""
+    this.name
     this.state = {
-      players: []
     }
   }
 
-  _nameInputChanged(text) {
-    this.name = text
-  }
-
   _addPlayer() {
+
     if (this.name.length > 0 && this.id < 8) {
       this.id += 1
       player = {
         id: this.id,
         name: this.name
       }
-      this.setState({
-        players: this.state.players.concat(player)
-      })
+      const action = { type: "ADD_PLAYER", value: player }
+      this.props.dispatch(action)
+
+      this._textInput.setNativeProps({text: ""})
+      this.name = ""
     }
   }
 
   render() {
+    console.log(this.props);
     return (
       <View style={styles.main_container}>
         <View style={styles.input_container}>
           <TextInput
             style={styles.text_input}
+            ref={component => this._textInput = component}
             placeholder='Nom du joueur'
-            onChangeText={(text) => this._nameInputChanged(text)}
-            onSubmitEditing={() => this._addPlayer()}
+            onChangeText={(text) => this.name = text}
+            onSubmitEditing={() => {this._addPlayer()}}
           />
           <Button style={styles.addButton} title='Ajouter' onPress={() => this._addPlayer()}/>
         </View>
         <FlatList
-          data={this.state.players}
+          data={this.props.players}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({item}) => <Player player={item}/>}
         />
@@ -73,3 +74,9 @@ const styles = StyleSheet.create({
     flex: 1
   }
 })
+
+const mapStateToProps = (state) => {
+  return state
+}
+
+export default connect(mapStateToProps)(Lobby)

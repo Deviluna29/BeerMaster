@@ -25,6 +25,12 @@ export default function setPlayer (state = initialState, action) {
         nextState.players[i].id = i + 1;
       }
       return nextState
+    case 'DELETE_ALL_PLAYERS':
+      nextState = {
+        ...state,
+        players: []
+      }
+      return nextState
     case 'SET_SCORE_PLAYER':
       var indexPlayer = action.value[0];
       nextState = { ...state }

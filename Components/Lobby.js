@@ -36,6 +36,11 @@ class Lobby extends React.Component {
     }
   }
 
+  _deleteAllPlayers() {
+    const action = { type: "DELETE_ALL_PLAYERS"}
+    this.props.dispatch(action)
+  }
+
   _displayTheGame() {
     this.props.navigation.navigate("Game")
   }
@@ -69,7 +74,7 @@ class Lobby extends React.Component {
             renderItem={({item}) => <Player player={item}/>}
           />
           <View style={styles.bottom_container}>
-            <Button style={styles.start_Button} color='black' title='Delete' onPress={() => {}}/>
+            <Button style={styles.start_Button} color='black' title='Delete' onPress={() => {this._deleteAllPlayers()}}/>
             <Button style={styles.start_Button} color='black' title='Lancer le Jeu' onPress={() => this._displayTheGame()}/>
           </View>
         </View>

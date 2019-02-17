@@ -1,5 +1,5 @@
 import { createStore } from 'redux'
-import setScore from './Reducers/scoreReducer'
 import setPlayer from './Reducers/playerReducer'
+import setOption from './Reducers/optionReducer'
 
 export default createStore(setPlayer)

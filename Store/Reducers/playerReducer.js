@@ -1,4 +1,9 @@
-const initialState = { players: [{id: 0, name: "McBernik", totalPledge: 0, totalPledgeOK: 0, totalDrink: 0, totalDrunk: 0}] }
+const initialState = { 
+  players: [
+    {id: 0, name: "McBernik", totalPledge: 0, totalPledgeOK: 0, totalDrink: 0, totalDrunk: 0},
+    {id: 1, name: "RonRon", totalPledge: 0, totalPledgeOK: 0, totalDrink: 0, totalDrunk: 0}
+  ] 
+}
 
 export default function setPlayer (state = initialState, action) {
   let nextState
@@ -21,7 +26,10 @@ export default function setPlayer (state = initialState, action) {
       }
       return nextState
     case 'SET_SCORE_PLAYER':
-      return nextState
+      var indexPlayer = action.value[0];
+      nextState = { ...state }
+      nextState.players[indexPlayer] = action.value[1]
+      return nextState || state
     default:
       return state
   }

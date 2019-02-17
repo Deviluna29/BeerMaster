@@ -1,8 +1,8 @@
-const initialState = { 
+const initialState = {
   players: [
-    {id: 0, name: "McBernik", totalPledge: 0, totalPledgeOK: 0, totalDrink: 0, totalDrunk: 0},
-    {id: 1, name: "RonRon", totalPledge: 0, totalPledgeOK: 0, totalDrink: 0, totalDrunk: 0}
-  ] 
+    {id: 1, name: "McBernik", totalPledge: 0, totalPledgeOK: 0, totalDrink: 0, totalDrunk: 0},
+    {id: 2, name: "RonRon", totalPledge: 0, totalPledgeOK: 0, totalDrink: 0, totalDrunk: 0}
+  ]
 }
 
 export default function setPlayer (state = initialState, action) {

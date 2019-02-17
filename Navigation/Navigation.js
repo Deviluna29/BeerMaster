@@ -2,6 +2,7 @@ import { createStackNavigator, createAppContainer, createSwitchNavigator } from 
 import Home from '../Components/Home'
 import Lobby from '../Components/Lobby'
 import Game from '../Components/Game'
+import Score from '../Components/Score'
 
 const SearchStackNavigator = createStackNavigator({
   Home: {
@@ -18,6 +19,12 @@ const SearchStackNavigator = createStackNavigator({
   },
   Game: {
     screen: Game,
+    navigationOptions: {
+      header: null
+    }
+  },
+  Score: {
+    screen: Score,
     navigationOptions: {
       header: null
     }

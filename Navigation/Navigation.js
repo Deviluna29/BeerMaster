@@ -7,13 +7,13 @@ const SearchStackNavigator = createStackNavigator({
   Home: {
     screen: Home,
     navigationOptions: {
-      title: 'Menu'
+      header: null
     }
   },
   Lobby: {
     screen: Lobby,
     navigationOptions: {
-      title: 'Lobby'
+      header: null
     }
   },
   Game: {

@@ -1,6 +1,7 @@
 import React from 'react'
-import { StyleSheet, TextInput, View, Text, Button } from 'react-native'
+import { StyleSheet, TextInput, View, Text, Button, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 class Player extends React.Component {
 
@@ -13,14 +14,11 @@ class Player extends React.Component {
     const player = this.props.player
     return (
       <View style={styles.mainContainer}>
-        <Text style={styles.text}>{player.name}</Text>
-        <Text style={styles.text}>Joueur N° {player.id}</Text>
-        <Button
-          style={styles.deleteButton}
-          title='Supprimer'
-          onPress={() => {this._deletePlayer()}}
-          color="red"
-          />
+        <Text style={styles.text_number}>{player.id}</Text>
+        <Text style={styles.text_name}>{player.name}</Text>
+        <TouchableOpacity onPress={() => {this._deletePlayer()}} style={styles.delete_Button}>
+            <FontAwesome name="trash-o" size={30} color={'red'} />
+        </TouchableOpacity>
       </View>
     )
   }
@@ -28,16 +26,44 @@ class Player extends React.Component {
 
 const styles = StyleSheet.create({
   mainContainer: {
-      flexDirection: 'row'
+    flexDirection: 'row',
+    marginLeft: 20,
+    marginRight: 20,
+    margin: 5,
   },
-  text: {
+  text_number: {
     flex: 1,
-    margin: 5
+    fontWeight: 'bold',
+    margin: 5,
+    color: 'white',
+    marginRight: 0,
+    borderTopLeftRadius: 8,
+    borderBottomLeftRadius: 8,
+    borderWidth: 2,
+    borderColor: 'black',
+    backgroundColor: 'rgba(14, 21, 164, 0.6)',
+    textAlign: 'center',
+    alignSelf: 'center'
   },
-  deleteButton: {
-    flex: 1,
-    margin: 5
-  }
+  text_name: {
+    flex: 7,
+    fontWeight: 'bold',
+    margin: 5,
+    marginLeft: 0,
+    borderTopRightRadius: 8,
+    borderBottomRightRadius: 8,
+    borderWidth: 2,
+    borderColor: 'black',
+    backgroundColor: 'rgba(255, 255, 255, 0.6)',
+    textAlign: 'center',
+    alignSelf: 'center'
+  },
+  delete_Button: {
+    flex: 2,
+    margin: 5,
+    alignItems:'center'
+  },
+
 })
 
 const mapStateToProps = (state) => {

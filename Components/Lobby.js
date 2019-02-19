@@ -62,6 +62,7 @@ class Lobby extends React.Component {
               placeholder='Nom du joueur'
               onChangeText={(text) => this.name = text}
               onSubmitEditing={() => {this._addPlayer()}}
+              maxLength={14}
             />
             <TouchableOpacity onPress={() => this._addPlayer()} style={styles.add_Button}>
                 <AntDesign name="plussquare" size={30} color={'green'} />

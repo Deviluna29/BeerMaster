@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, Button, ImageBackground, TouchableOpacity, Text
 import { randomPledge } from '../helpers/pledgeHelper'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 class Game extends React.Component {
 
@@ -17,8 +18,8 @@ class Game extends React.Component {
             currentRound: 0
          }
     }
-    
-    _displayFinalScore() {        
+
+    _displayFinalScore() {
         this.props.navigation.navigate("Score")
       }
 
@@ -63,35 +64,32 @@ class Game extends React.Component {
 
     render() {
         return (
-            <ImageBackground source={require('../assets/images/background.jpeg')} style={{width: '100%', height: '100%'}}>
-                <View style={{ flex: 1, alignItems: 'center', marginTop: 50}}>
-                    <View style={{ padding: 10, borderRadius: 4, borderWidth: 2, borderColor: '#fff', backgroundColor: 'rgba(255, 255, 255, 0.5)', height: 100, width: 250 }}>
-                        <Text style={{fontWeight: 'bold'}}>Score de {this.state.players[this.state.currentPlayer].name} :</Text>
-                        <Text>Total de gage : {this.state.players[this.state.currentPlayer].totalPledge}</Text>
-                        <Text>Total de gage FAIT : {this.state.players[this.state.currentPlayer].totalPledgeOK}</Text>
-                        <Text>Total de shot : {this.state.players[this.state.currentPlayer].totalDrink}</Text>
-                        <Text>Total de shot BU : {this.state.players[this.state.currentPlayer].totalDrunk}</Text>
-                    </View>
-                    <View style={{marginTop: 50, borderRadius: 4, borderWidth: 2, borderColor: '#fff', backgroundColor: 'rgba(255, 255, 255, 0.5)', height: 420, width: 250 }}>
-                        <View style={{height: 285}}>
-                            <Text style={{ margin: 10, fontWeight: 'bold',  }}>{this.state.pledge.name}</Text>
-                            <Text style={{ margin: 10, }}>{this.state.players[this.state.currentPlayer].name} {this.state.pledge.desc}</Text>
+            <ImageBackground source={require('../assets/images/background_home.png')} style={{width: '100%', height: '100%'}}>
+                <View style={styles.main_container}>
+                    <View style={styles.header_container}>
+                        <Text style={styles.player_name}>{this.state.players[this.state.currentPlayer].name}</Text>
+                        <View style={{flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width:170}}>
+                          <Entypo name="drink" size={30} color={'red'} />
+                          <Text style={styles.score}>{this.state.players[this.state.currentPlayer].totalPledge}</Text>
+                          <Entypo name="star" size={30} color={'green'} />
+                          <Text style={styles.score}>{this.state.players[this.state.currentPlayer].totalPledgeOK}</Text>
                         </View>
-                        <View style={{ flexDirection: 'row' }}>
-                            <TouchableOpacity onPress={() => this._pledgeButton()}  style={{flexDirection: 'row', justifyContent:'center', alignItems: 'center', marginTop: 10, marginLeft: 10, borderRadius: 4, borderWidth: 2, borderColor: '#fff', width: 100, height: 50, backgroundColor: 'rgba(180, 127, 4, 0.5)'}} >
+                    </View>
+                    <View style={styles.bottom_container}>
+                        <View style={{height: 360}}>
+                            <Text style={{ margin: 5, fontWeight: 'bold', textAlign: 'center', fontSize: 20}}>{this.state.pledge.name}</Text>
+                            <Text style={{ margin: 5, textAlign: 'center', fontSize: 30}}>{this.state.players[this.state.currentPlayer].name} {this.state.pledge.desc}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
+                            <TouchableOpacity onPress={() => this._pledgeButton()}  style={{flexDirection: 'row', justifyContent:'center', alignItems: 'center', marginLeft: 10, borderRadius: 4, borderWidth: 2, borderColor: '#fff', width: 100, height: 50, backgroundColor: 'rgba(180, 127, 4, 0.5)'}} >
                                 <Icon name="reddit-alien" size={20} color={'white'} />
                                 <Text style={{color: '#fff'}}>Ca gage !</Text>
                             </TouchableOpacity>
-
-                            <TouchableOpacity onPress={() => this._drinkButton()}  style={{flexDirection: 'row', justifyContent:'center', alignItems: 'center', marginTop: 10, marginLeft: 25, borderRadius: 4, borderWidth: 2, borderColor: '#fff', width: 100, height: 50, backgroundColor: 'rgba(180, 89, 4, 0.5)'}} >
+                            <TouchableOpacity onPress={() => this._drinkButton()}  style={{flexDirection: 'row', justifyContent:'center', alignItems: 'center', marginLeft: 25, borderRadius: 4, borderWidth: 2, borderColor: '#fff', width: 100, height: 50, backgroundColor: 'rgba(180, 89, 4, 0.5)'}} >
                                 <Icon name="glass" size={20} color={'white'} />
                                 <Text style={{color: '#fff'}}>Je bois !</Text>
                             </TouchableOpacity>
                         </View>
-                            <TouchableOpacity onPress={() => this._comboButton()}  style={{flexDirection: 'row', justifyContent:'center', alignItems: 'center', marginTop: 20, marginLeft: 80, borderRadius: 4, borderWidth: 2, borderColor: '#fff', width: 100, height: 50, backgroundColor: 'rgba(98, 4, 180, 0.5)'}} >
-                                <Icon name="superpowers" size={20} color={'white'} />
-                                <Text style={{color: '#fff'}}>Combo !!!</Text>
-                        </TouchableOpacity>
                     </View>
                 </View>
             </ImageBackground>
@@ -99,8 +97,52 @@ class Game extends React.Component {
     }
 }
 
+const styles = StyleSheet.create({
+  main_container: {
+    marginTop: 50,
+    marginBottom: 30,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  header_container: {
+    padding: 7,
+    height: 110,
+    width: 300,
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  player_name: {
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    fontWeight: 'bold',
+    borderRadius: 100,
+    borderWidth: 2,
+    borderColor: 'white',
+    backgroundColor: 'black',
+    color: 'white',
+    fontSize: 25,
+    width:200,
+    height:50
+  },
+  score: {
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    fontSize: 25
+  },
+  bottom_container: {
+    marginTop: 15,
+    borderRadius: 4,
+    borderWidth: 2,
+    borderColor: '#fff',
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    height: 420,
+    width: 300
+  }
+})
+
 const mapStateToProps = (state) => {
     return state
   }
-  
+
   export default connect(mapStateToProps)(Game)

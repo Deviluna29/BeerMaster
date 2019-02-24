@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     backgroundColor: 'rgba(14, 21, 164, 0.6)',
     textAlign: 'center',
-    alignSelf: 'center'
+    textAlignVertical: 'center'
   },
   text_name: {
     flex: 7,
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     backgroundColor: 'rgba(255, 255, 255, 0.6)',
     textAlign: 'center',
-    alignSelf: 'center'
+    textAlignVertical: 'center'
   },
   delete_Button: {
     flex: 2,

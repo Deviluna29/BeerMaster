@@ -26,7 +26,9 @@ class Lobby extends React.Component {
       if (this.name.length > 0 && this.id < 9) {
       player = {
         id: this.id,
-        name: this.name
+        name: this.name,
+        totalPledge: 0,
+        totalDrink: 0
       }
       const action = { type: "ADD_PLAYER", value: player }
       this.props.dispatch(action)
@@ -47,12 +49,12 @@ class Lobby extends React.Component {
 
   render() {
     return (
-      <ImageBackground source={require('../assets/images/animated2.gif')} style={{width: '100%', height: '100%'}}>
+      <ImageBackground source={require('../assets/images/background_home.png')} style={{width: '100%', height: '100%'}}>
         <View style={styles.main_container}>
           <View style={styles.header_container}>
             <Image
               style={styles.header_image}
-              source={require('../assets/images/team_8bits.png')}
+              source={require('../assets/images/lobby_header.png')}
             />
           </View>
           <View style={styles.input_container}>
@@ -95,8 +97,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   header_image: {
-    height: 100,
-    width: 300,
+    height: 80,
+    width: 250,
   },
   input_container: {
     flexDirection: 'row',

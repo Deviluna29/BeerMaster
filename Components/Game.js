@@ -13,7 +13,7 @@ class Game extends React.Component {
             pledge: randomPledge(),
             players: this.props.players,
             currentPlayer: 0,
-            maxRound: 100,
+            maxRound: 3,
             currentRound: 0,
          }
     }
@@ -52,6 +52,12 @@ class Game extends React.Component {
             <ImageBackground source={this.state.pledge.theme} style={{width: '100%', height: '100%'}}>
                 <View style={styles.main_container}>
                     <View style={styles.header_container}>
+                        <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '90%'}}>
+                            <Text>{this.state.pledge.name}</Text>
+                            <TouchableOpacity>
+                                <Entypo name="trophy" size={30} color={'yellow'}/>
+                            </TouchableOpacity>                            
+                        </View>
                         <Text style={styles.player_name}>{this.state.players[this.state.currentPlayer].name}</Text>
                         <View style={{flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width:170}}>                          
                           <Entypo name="star" size={30} color={'green'} />
@@ -82,30 +88,28 @@ class Game extends React.Component {
 
 const styles = StyleSheet.create({
     main_container: {
-      marginTop: 50,
+      marginTop: 25,
       marginBottom: 30,
       flex: 1,
-      justifyContent: 'center',
+      justifyContent: 'space-between',
       alignItems: 'center'
     },
     header_container: {
-      padding: 7,
-      height: 110,
-      width: 300,
+      width: '100%',
+      height: '25%',
       alignItems: 'center',
-      justifyContent: 'space-between'
+      justifyContent: 'space-evenly'
     },
     player_name: {
       textAlign: 'center',
       textAlignVertical: 'center',
       fontWeight: 'bold',
-      borderRadius: 100,
       borderWidth: 2,
       borderColor: 'white',
       backgroundColor: 'black',
       color: 'white',
       fontSize: 25,
-      width:200,
+      width: '105%',
       height:50
     },
     score: {

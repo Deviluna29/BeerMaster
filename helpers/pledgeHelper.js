@@ -1,14 +1,13 @@
 
 export function randomPledge(){
-    var randomNumber = Math.floor(Math.random() * 4);
     var num = Math.floor(Math.random() * 3);
 
     if (num == 0) {
-        return pledgesQuestions[randomNumber];
+        return pledgesQuestions[Math.floor(Math.random() * pledgesQuestions.length)];
     } else if (num == 1) {
-        return pledgesActions[randomNumber];
+        return pledgesActions[Math.floor(Math.random() * pledgesActions.length)];
     } else if (num == 2) {
-        return pledgesVerites[randomNumber];
+        return pledgesVerites[Math.floor(Math.random() * pledgesVerites.length)];
     } else {
         return []
     }    

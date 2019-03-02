@@ -1,26 +1,42 @@
 
-
-export function formatData() {
-
-    return pledges
-}
-
 export function randomPledge(){
-    var randomNumber = Math.floor(Math.random() * 11);
-    return pledges[randomNumber];
+    var randomNumber = Math.floor(Math.random() * 4);
+    var num = Math.floor(Math.random() * 3);
+
+    if (num == 0) {
+        return pledgesQuestions[randomNumber];
+    } else if (num == 1) {
+        return pledgesActions[randomNumber];
+    } else if (num == 2) {
+        return pledgesVerites[randomNumber];
+    } else {
+        return []
+    }    
 }
 
+const QUESTIONS = require('../assets/images/background_game2.png')
+const ACTIONS = require('../assets/images/background_home.png')
+const VERITES = require('../assets/images/background_game3.png')
 
-const pledges = [
-    {id:0,name:"Gage 1",desc:"Fai la poule ou tu sera plus cool !",powerPledge: 1, powerDrink: 1},
-    {id:1,name:"Gage 2",desc:"Fai la poule ou tu sera plus cool !",powerPledge: 1, powerDrink: 1},
-    {id:2,name:"Gage 3",desc:"Fai la poule ou tu sera plus cool !",powerPledge: 1, powerDrink: 1},
-    {id:3,name:"Gage 4",desc:"Fai la poule ou tu sera plus cool !",powerPledge: 1, powerDrink: 1},
-    {id:4,name:"Gage 5",desc:"Fai la poule ou tu sera plus cool !",powerPledge: 1, powerDrink: 1},
-    {id:5,name:"Gage 6",desc:"Fai la poule ou tu sera plus cool !",powerPledge: 1, powerDrink: 1},
-    {id:6,name:"Gage 7",desc:"Fai la poule ou tu sera plus cool !",powerPledge: 1, powerDrink: 1},
-    {id:7,name:"Gage 8",desc:"Fai la poule ou tu sera plus cool !",powerPledge: 1, powerDrink: 1},
-    {id:8,name:"Gage 9",desc:"Fai la poule ou tu sera plus cool !",powerPledge: 1, powerDrink: 1},
-    {id:9,name:"Gage 10",desc:"Fai la poule ou tu sera plus cool !",powerPledge: 1, powerDrink: 1},
-    {id:10,name:"Gage 11",desc:"Fai la poule ou tu sera plus cool !",powerPledge: 1, powerDrink: 1}
-    ]
+// Tèmes : Questions | Action | Vérité | Marques
+
+const pledgesQuestions = [
+    {id:0,name:"Question 1",desc:"Quelle est la vitesse de la lumière ?",powerPledge: 1, powerDrink: 1, theme: QUESTIONS},
+    {id:1,name:"Question 2",desc:"Cites les 2 couleurs du drapeau Canadien",powerPledge: 1, powerDrink: 1, theme: QUESTIONS},
+    {id:2,name:"Question 3",desc:"Combien d'étoiles y a t'il sur le drapeau Américain ?",powerPledge: 1, powerDrink: 1, theme: QUESTIONS},
+    {id:3,name:"Question 4",desc:"Combien font 3 + 2 x 0",powerPledge: 1, powerDrink: 1, theme: QUESTIONS}
+]
+
+const pledgesActions = [
+    {id:0,name:"Action 1",desc:"Fais 10 pompes",powerPledge: 1, powerDrink: 1, theme: ACTIONS},
+    {id:1,name:"Action 2",desc:"Fais 3 fois le tour de la table",powerPledge: 1, powerDrink: 1, theme: ACTIONS},
+    {id:2,name:"Action 3",desc:"Enlève 1 vêtement",powerPledge: 1, powerDrink: 1, theme: ACTIONS},
+    {id:3,name:"Action 4",desc:"Bois dans le verre de ton voisin",powerPledge: 1, powerDrink: 1, theme: ACTIONS}
+]
+
+const pledgesVerites = [
+    {id:0,name:"Vérité 1",desc:"Alors dis la vérité",powerPledge: 1, powerDrink: 1, theme: VERITES},
+    {id:1,name:"Vérité 2",desc:"Alors dis la vérité",powerPledge: 1, powerDrink: 1, theme: VERITES},
+    {id:2,name:"Vérité 3",desc:"Alors dis la vérité",powerPledge: 1, powerDrink: 1, theme: VERITES},
+    {id:3,name:"Vérité 4",desc:"Alors dis la vérité",powerPledge: 1, powerDrink: 1, theme: VERITES}
+  ]

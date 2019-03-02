@@ -1,7 +1,7 @@
 const initialState = {
   players: [
-    {id: 1, name: "McBernik", totalPledge: 0, totalPledgeOK: 0, totalDrink: 0, totalDrunk: 0},
-    {id: 2, name: "RonRon", totalPledge: 0, totalPledgeOK: 0, totalDrink: 0, totalDrunk: 0}
+    {id: 1, name: "McBernik", totalPledge: 0, totalDrink: 0},
+    {id: 2, name: "RonRon", totalPledge: 0, totalDrink: 0}
   ]
 }
 

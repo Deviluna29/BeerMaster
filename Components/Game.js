@@ -3,7 +3,6 @@ import React from 'react'
 import { StyleSheet, View, Text, Button, ImageBackground, TouchableOpacity, TextInput } from 'react-native'
 import { randomPledge } from '../helpers/pledgeHelper'
 import { connect } from 'react-redux'
-import Icon from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 class Game extends React.Component {
@@ -14,8 +13,8 @@ class Game extends React.Component {
             pledge: randomPledge(),
             players: this.props.players,
             currentPlayer: 0,
-            maxRound: 2,
-            currentRound: 0
+            maxRound: 100,
+            currentRound: 0,
          }
     }
     
@@ -36,27 +35,13 @@ class Game extends React.Component {
 
     _pledgeButton(){
         this.state.players[this.state.currentPlayer].totalPledge += this.state.pledge.powerPledge
-        this.state.players[this.state.currentPlayer].totalPledgeOK += this.state.pledge.powerPledge
-        this.state.players[this.state.currentPlayer].totalDrink += this.state.pledge.powerDrink
         const action = { type: "SET_SCORE_PLAYER", value: [this.state.currentPlayer, this.state.players[this.state.currentPlayer]] }
         this.props.dispatch(action)
         this._loadNewPledge()
     }
 
     _drinkButton(){
-        this.state.players[this.state.currentPlayer].totalPledge += this.state.pledge.powerPledge
         this.state.players[this.state.currentPlayer].totalDrink += this.state.pledge.powerDrink
-        this.state.players[this.state.currentPlayer].totalDrunk += this.state.pledge.powerDrink
-        const action = { type: "SET_SCORE_PLAYER", value: [this.state.currentPlayer, this.state.players[this.state.currentPlayer]] }
-        this.props.dispatch(action)
-        this._loadNewPledge()
-    }
-
-    _comboButton(){
-        this.state.players[this.state.currentPlayer].totalPledge += this.state.pledge.powerPledge
-        this.state.players[this.state.currentPlayer].totalPledgeOK += this.state.pledge.powerPledge
-        this.state.players[this.state.currentPlayer].totalDrink += this.state.pledge.powerDrink
-        this.state.players[this.state.currentPlayer].totalDrunk += this.state.pledge.powerDrink
         const action = { type: "SET_SCORE_PLAYER", value: [this.state.currentPlayer, this.state.players[this.state.currentPlayer]] }
         this.props.dispatch(action)
         this._loadNewPledge()
@@ -64,30 +49,28 @@ class Game extends React.Component {
 
     render() {
         return (
-            <ImageBackground source={require('../assets/images/background_home.png')} style={{width: '100%', height: '100%'}}>
+            <ImageBackground source={this.state.pledge.theme} style={{width: '100%', height: '100%'}}>
                 <View style={styles.main_container}>
                     <View style={styles.header_container}>
                         <Text style={styles.player_name}>{this.state.players[this.state.currentPlayer].name}</Text>
-                        <View style={{flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width:170}}>
-                          <Entypo name="drink" size={30} color={'red'} />
-                          <Text style={styles.score}>{this.state.players[this.state.currentPlayer].totalPledge}</Text>
+                        <View style={{flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width:170}}>                          
                           <Entypo name="star" size={30} color={'green'} />
-                          <Text style={styles.score}>{this.state.players[this.state.currentPlayer].totalPledgeOK}</Text>
+                          <Text style={styles.score}>{this.state.players[this.state.currentPlayer].totalPledge}</Text>
+                          <Entypo name="drink" size={30} color={'red'} />
+                          <Text style={styles.score}>{this.state.players[this.state.currentPlayer].totalDrink}</Text>
                         </View>
                     </View>
                     <View style={styles.bottom_container}>
                         <View style={{height: 360}}>
                             <Text style={{ margin: 5, fontWeight: 'bold', textAlign: 'center', fontSize: 20}}>{this.state.pledge.name}</Text>
-                            <Text style={{ margin: 5, textAlign: 'center', fontSize: 30}}>{this.state.players[this.state.currentPlayer].name} {this.state.pledge.desc}</Text>
+                            <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 30}}>{this.state.players[this.state.currentPlayer].name} {this.state.pledge.desc}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
                             <TouchableOpacity onPress={() => this._pledgeButton()}  style={{flexDirection: 'row', justifyContent:'center', alignItems: 'center', marginLeft: 10, borderRadius: 4, borderWidth: 2, borderColor: '#fff', width: 100, height: 50, backgroundColor: 'rgba(180, 127, 4, 0.5)'}} >
-                                <Icon name="reddit-alien" size={20} color={'white'} />
-                                <Text style={{color: '#fff'}}>Ca gage !</Text>
+                                <Entypo name="star" size={20} color={'green'} />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => this._drinkButton()}  style={{flexDirection: 'row', justifyContent:'center', alignItems: 'center', marginLeft: 25, borderRadius: 4, borderWidth: 2, borderColor: '#fff', width: 100, height: 50, backgroundColor: 'rgba(180, 89, 4, 0.5)'}} >
-                                <Icon name="glass" size={20} color={'white'} />
-                                <Text style={{color: '#fff'}}>Je bois !</Text>
+                                <Entypo name="drink" size={20} color={'red'} />
                             </TouchableOpacity>
                         </View>
                     </View>

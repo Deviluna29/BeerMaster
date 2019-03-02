@@ -8,7 +8,10 @@ class Score extends React.Component {
 
     constructor(props) {
         super(props)
-        this.props.players.sort(this._compareValues('totalPledge', 'desc'))
+        this.state = {
+            players: this.props.players
+        }
+        this.state.players.sort(this._compareValues('totalPledge', 'desc'))
     }
 
     _compareValues(key, order='asc') {
@@ -49,7 +52,7 @@ class Score extends React.Component {
         return (
                 <View style={{ flex: 1, alignItems: 'center', paddingTop: 50, backgroundColor: "#5abcbb"}}>
                     <Image style={styles.header_image} source={require('../assets/images/cup-winner.png')} />
-                    <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 30, width: 200}}>{this.props.players[0].name}</Text>
+                    <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 30, width: 200}}>{this.state.players[0].name}</Text>
                     <View style={{ padding: 10, marginTop: 20, borderRadius: 4, borderWidth: 2, borderColor: '#fff', backgroundColor: 'rgba(255, 255, 255, 0.5)', height: 200, width: 250 }}>
                         <View style={{flexDirection: 'row', paddingBottom: 5}}>
                             <Icon name="hashtag" size={20} color={'white'} />
@@ -58,7 +61,7 @@ class Score extends React.Component {
                             <Icon name="beer" size={20} color={'white'} style={{marginLeft: 15}} />
                         </View>
                         <FlatList
-                            data={this.props.players}
+                            data={this.state.players}
                             keyExtractor={(item) => item.id.toString()}
                             renderItem={this._renderItem}
                             />      

@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { StyleSheet, View, Button, Image, ImageBackground, TouchableOpacity, Text } from 'react-native'
+import { StyleSheet, View, Image, ImageBackground, TouchableOpacity, Text } from 'react-native'
 
 export default class Home extends React.Component {
 

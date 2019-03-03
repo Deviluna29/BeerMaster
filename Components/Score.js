@@ -41,7 +41,7 @@ class Score extends React.Component {
 
     _renderItem = ({item, index}) => (
         <View style={{ flexDirection: 'row',  paddingBottom: 5, borderTopWidth: 1, borderTopColor: '#fff'}}>
-            <Text style={{ textAlign: 'center', fontWeight: 'bold', width: 15}}>{index+1}</Text>
+            <Text style={{textAlign: 'center', fontWeight: 'bold', width: 15}}>{index+1}</Text>
             <Text style={{textAlign: 'center', fontWeight: 'bold', justifyContent: 'center', width: 150}}>{item.name}</Text>
             <Text style={{fontWeight: 'bold', textAlign: 'center', width: 30}}>{item.totalPledge}</Text>
             <Text style={{fontWeight: 'bold', textAlign: 'center', width: 30}}>{item.totalDrink}</Text>

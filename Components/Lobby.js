@@ -16,8 +16,8 @@ class Lobby extends React.Component {
 
   _addPlayer() {
       // Set the id of the player to add
-      if (this.props.players[this.props.players.length - 1] != null) {
-        this.id = this.props.players[this.props.players.length - 1].id + 1
+      if (this.props.playerReducer.players[this.props.playerReducer.players.length - 1] != null) {
+        this.id = this.props.playerReducer.players[this.props.playerReducer.players.length - 1].id + 1
       } else {
         this.id = 1
       }
@@ -72,7 +72,7 @@ class Lobby extends React.Component {
           </View>
           <FlatList
           style={styles.flatlist}
-            data={this.props.players}
+            data={this.props.playerReducer.players}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({item}) => <Player player={item}/>}
           />

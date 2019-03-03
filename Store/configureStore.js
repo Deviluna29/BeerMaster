@@ -1,5 +1,6 @@
 import { createStore } from 'redux'
-import setPlayer from './Reducers/playerReducer'
-import setOption from './Reducers/optionReducer'
+import rootReducer from './Reducers/index'
 
-export default createStore(setPlayer)
+const store = createStore(rootReducer)
+
+export default store

@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { StyleSheet, View, Text, Button, ImageBackground, TouchableOpacity, TextInput } from 'react-native'
+import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity } from 'react-native'
 import { randomPledge } from '../helpers/pledgeHelper'
 import { connect } from 'react-redux'
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -11,9 +11,9 @@ class Game extends React.Component {
         super(props)
         this.state = {
             pledge: randomPledge(),
-            players: this.props.players,
+            players: this.props.playerReducer.players,
             currentPlayer: 0,
-            maxRound: 3,
+            maxRound: this.props.parameterReducer.parameters.nbrTourMax,
             currentRound: 0,
          }
     }
@@ -55,7 +55,7 @@ class Game extends React.Component {
                         <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '90%'}}>
                             <Text>{this.state.pledge.name}</Text>
                             <TouchableOpacity>
-                                <Entypo name="trophy" size={30} color={'yellow'}/>
+                                <Image style={styles.trophy_image} source={require('../assets/images/cup-winner.png')} />
                             </TouchableOpacity>                            
                         </View>
                         <Text style={styles.player_name}>{this.state.players[this.state.currentPlayer].name}</Text>
@@ -94,6 +94,10 @@ const styles = StyleSheet.create({
       justifyContent: 'space-between',
       alignItems: 'center'
     },
+    trophy_image: {
+        width: 30,
+        height: 30
+      },
     header_container: {
       width: '100%',
       height: '25%',

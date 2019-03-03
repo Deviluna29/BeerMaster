@@ -4,8 +4,12 @@ import { StyleSheet, View, Image, ImageBackground, TouchableOpacity, Text } from
 
 export default class Home extends React.Component {
 
-_displayTheLobby() {
+_displayLobby() {
   this.props.navigation.navigate("Lobby");
+}
+
+_displayParameters() {
+  this.props.navigation.navigate("Parameters");
 }
 
     render() {
@@ -16,13 +20,13 @@ _displayTheLobby() {
                 style={styles.header_image}
                 source={require('../assets/images/beer_home.png')}
               />
-              <TouchableOpacity style={styles.button} onPress={() => {this._displayTheLobby()}}>
+              <TouchableOpacity style={styles.button} onPress={() => {this._displayLobby()}}>
                 <Text style={styles.button_text}>Jouer</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.button} onPress={() => {}}>
                 <Text style={styles.button_text}>Scores</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.button} onPress={() => {}}>
+              <TouchableOpacity style={styles.button} onPress={() => {this._displayParameters()}}>
                 <Text style={styles.button_text}>Paramètres</Text>
               </TouchableOpacity>
             </View>

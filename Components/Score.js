@@ -9,7 +9,7 @@ class Score extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            players: this.props.players
+            players: this.props.playerReducer.players
         }
         this.state.players.sort(this._compareValues('totalPledge', 'desc'))
     }

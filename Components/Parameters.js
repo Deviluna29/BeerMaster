@@ -38,9 +38,8 @@ class Parameters extends React.Component {
                     <TextInput
                         style={styles.text_input}
                         defaultValue={this.nbrPoints}
-                        ref={component => this._textInput = component}
                         placeholder='...'
-                        onChangeText={(text) => this.name = text}
+                        onChangeText={(text) => this.nbrPoints = text}
                         maxLength={3}
                         keyboardType='numeric'
                     />

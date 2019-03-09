@@ -11,6 +11,7 @@ class Lobby extends React.Component {
     this.id = 0
     this.name = ""
     this.state = {
+      typeGame: true
     }
   }
 
@@ -44,7 +45,19 @@ class Lobby extends React.Component {
   }
 
   _displayTheGame() {
-    this.props.navigation.navigate("Game")
+    this.props.navigation.navigate("Game", { typeGame: this.state.typeGame })
+  }
+
+  _switchGameType() {
+    this.setState ({ typeGame: !this.state.typeGame });
+  }
+
+  _renderTypeGame() {
+    if (this.state.typeGame === true) {
+      return <Button style={styles.start_Button} color='black' title='Par Tour' onPress={() => this. _switchGameType()}/>
+    } else {
+      return <Button style={styles.start_Button} color='black' title='Par Score' onPress={() => this. _switchGameType()}/>
+    }
   }
 
   render() {
@@ -79,6 +92,7 @@ class Lobby extends React.Component {
           <View style={styles.bottom_container}>
             <Button style={styles.start_Button} color='black' title='Delete' onPress={() => {this._deleteAllPlayers()}}/>
             <Button style={styles.start_Button} color='black' title='Lancer le Jeu' onPress={() => this._displayTheGame()}/>
+            { this._renderTypeGame() }
           </View>
         </View>
       </ImageBackground>

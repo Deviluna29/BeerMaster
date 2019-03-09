@@ -9,11 +9,13 @@ class Game extends React.Component {
 
     constructor(props) {
         super(props)
+        this.typeGame = this.props.navigation.state.params.typeGame;
         this.state = {
             pledge: randomPledge(),
             players: this.props.playerReducer.players,
             currentPlayer: 0,
             maxRound: this.props.parameterReducer.parameters.nbrTourMax,
+            maxScore: this.props.parameterReducer.parameters.nbrPointsMax,
             currentRound: 0,
          }
     }
@@ -29,7 +31,9 @@ class Game extends React.Component {
             newCurrentRound++;
             newCurrentPlayer = 0;
         }
-        if(newCurrentRound >= this.state.maxRound) this._displayFinalScore()
+        console.log(this.typeGame)
+        if(this.typeGame === true && newCurrentRound >= this.state.maxRound) this._displayFinalScore()
+        else if (this.typeGame === false && this.state.players[0].totalPledge >= this.state.maxScore)  this._displayFinalScore()
         else this.setState({ pledge: randomPledge(), currentPlayer: newCurrentPlayer, currentRound: newCurrentRound})
     }
 

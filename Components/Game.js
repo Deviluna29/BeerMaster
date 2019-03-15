@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity } from
 import { randomPledge } from '../helpers/pledgeHelper'
 import { connect } from 'react-redux'
 import Entypo from 'react-native-vector-icons/Entypo';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class Game extends React.Component {
 

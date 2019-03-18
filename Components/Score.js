@@ -3,13 +3,14 @@ import React from 'react'
 import { StyleSheet, View, Text, Image, FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/FontAwesome';
+import cloneDeep from 'lodash/cloneDeep'
 
 class Score extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            players: this.props.playerReducer.players
+            players: cloneDeep(this.props.playerReducer.players)
         }
         this.state.players.sort(this._compareValues('totalPledge', 'desc'))
     }

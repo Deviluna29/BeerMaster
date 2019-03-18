@@ -32,7 +32,6 @@ class Game extends React.Component {
             newCurrentRound++;
             newCurrentPlayer = 0;
         }
-        console.log(this.typeGame)
         if(this.typeGame === true && newCurrentRound >= this.state.maxRound) this._displayFinalScore()
         else if (this.typeGame === false && this.state.players[0].totalPledge >= this.state.maxScore)  this._displayFinalScore()
         else this.setState({ pledge: randomPledge(), currentPlayer: newCurrentPlayer, currentRound: newCurrentRound})

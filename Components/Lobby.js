@@ -45,6 +45,8 @@ class Lobby extends React.Component {
   }
 
   _displayTheGame() {
+    const action = { type: "EMPTY_SCORE"}
+    this.props.dispatch(action)
     this.props.navigation.navigate("Game", { typeGame: this.state.typeGame })
   }
 

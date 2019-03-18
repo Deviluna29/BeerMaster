@@ -38,5 +38,12 @@ export default function setPlayer (state = initialState, action) {
       return nextState || state
     default:
       return state
+    case 'EMPTY_SCORE':
+    nextState = { ...state }
+    for (i =0 ; i < nextState.players.length; i++) {
+      nextState.players[i].totalDrink = 0;
+      nextState.players[i].totalPledge = 0;
+    }    
+    return nextState || state
   }
 }

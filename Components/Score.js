@@ -1,9 +1,10 @@
 
 import React from 'react'
-import { StyleSheet, View, Text, Image, FlatList } from 'react-native'
+import { StyleSheet, View, Text, Image, FlatList, BackHandler} from 'react-native'
 import { connect } from 'react-redux'
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome'
 import cloneDeep from 'lodash/cloneDeep'
+import { compareValues } from '../helpers/functionsHelper'
 
 class Score extends React.Component {
 
@@ -12,32 +13,20 @@ class Score extends React.Component {
         this.state = {
             players: cloneDeep(this.props.playerReducer.players)
         }
-        this.state.players.sort(this._compareValues('totalPledge', 'desc'))
+        this.state.players.sort(compareValues('totalPledge', 'desc'))
     }
 
-    _compareValues(key, order='asc') {
-        return function(a, b) {
-          if(!a.hasOwnProperty(key) || 
-             !b.hasOwnProperty(key)) {
-              return 0; 
-          }
-          
-          const varA = (typeof a[key] === 'string') ? 
-            a[key].toUpperCase() : a[key];
-          const varB = (typeof b[key] === 'string') ? 
-            b[key].toUpperCase() : b[key];
-            
-          let comparison = 0;
-          if (varA > varB) {
-            comparison = 1;
-          } else if (varA < varB) {
-            comparison = -1;
-          }
-          return (
-            (order == 'desc') ? 
-            (comparison * -1) : comparison
-          );
-        };
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+      }
+    
+      componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
+      }
+    
+      handleBackPress = () => {
+        
+        return true;
       }
 
     _renderItem = ({item, index}) => (

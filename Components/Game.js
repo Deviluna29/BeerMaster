@@ -1,10 +1,12 @@
 
 import React from 'react'
-import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity, Modal, FlatList } from 'react-native'
 import { randomPledge } from '../helpers/pledgeHelper'
 import { connect } from 'react-redux'
-import Entypo from 'react-native-vector-icons/Entypo';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Entypo from 'react-native-vector-icons/Entypo'
+import Icon from 'react-native-vector-icons/FontAwesome'
+import { compareValues } from '../helpers/functionsHelper'
+import cloneDeep from 'lodash/cloneDeep'
 
 class Game extends React.Component {
 
@@ -18,8 +20,25 @@ class Game extends React.Component {
             maxRound: this.props.parameterReducer.parameters.nbrTourMax,
             maxScore: this.props.parameterReducer.parameters.nbrPointsMax,
             currentRound: 0,
+            modalVisible: false,
+            playersForScore : this.props.playerReducer.players
          }
     }
+
+    _renderItemScore = ({item, index}) => (
+      <View style={{ flexDirection: 'row',  paddingBottom: 5, borderTopWidth: 1, borderTopColor: '#fff'}}>
+          <Text style={{textAlign: 'center', fontWeight: 'bold', width: 15}}>{index+1}</Text>
+          <Text style={{textAlign: 'center', fontWeight: 'bold', justifyContent: 'center', width: 150}}>{item.name}</Text>
+          <Text style={{fontWeight: 'bold', textAlign: 'center', width: 30}}>{item.totalPledge}</Text>
+          <Text style={{fontWeight: 'bold', textAlign: 'center', width: 30}}>{item.totalDrink}</Text>
+      </View>
+    );
+
+    _setModalVisible(visible) {
+
+        this.state.playersForScore.sort(compareValues('totalPledge', 'desc'))
+        this.setState({modalVisible: visible});
+      }
     
     _displayFinalScore() {        
         this.props.navigation.navigate("Score")
@@ -39,6 +58,7 @@ class Game extends React.Component {
 
     _pledgeButton(){
         this.state.players[this.state.currentPlayer].totalPledge += this.state.pledge.powerPledge
+        this.state.playersForScore[this.state.currentPlayer].totalPledge += this.state.pledge.powerPledge
         const action = { type: "SET_SCORE_PLAYER", value: [this.state.currentPlayer, this.state.players[this.state.currentPlayer]] }
         this.props.dispatch(action)
         this._loadNewPledge()
@@ -46,6 +66,7 @@ class Game extends React.Component {
 
     _drinkButton(){
         this.state.players[this.state.currentPlayer].totalDrink += this.state.pledge.powerDrink
+        this.state.playersForScore[this.state.currentPlayer].totalDrink += this.state.pledge.powerDrink
         const action = { type: "SET_SCORE_PLAYER", value: [this.state.currentPlayer, this.state.players[this.state.currentPlayer]] }
         this.props.dispatch(action)
         this._loadNewPledge()
@@ -55,10 +76,43 @@ class Game extends React.Component {
         return (
             <ImageBackground source={this.state.pledge.theme} style={{width: '100%', height: '100%'}}>
                 <View style={styles.main_container}>
+
+
+                <Modal
+                
+          animationType="slide"
+          transparent={true}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {
+            this._setModalVisible(false);
+          }}
+          >
+                    <TouchableOpacity 
+            style={{marginTop: 50, flex: 1, alignItems: 'center'}}
+            activeOpacity={1} 
+            onPressOut={() => {this._setModalVisible(false)}}
+          >
+              <View style={{ padding: 10, marginTop: 20, borderRadius: 4, borderWidth: 2, borderColor: '#fff', backgroundColor: 'rgba(90, 188, 187, 0.7)', height: 200, width: 250 }}>
+                        <View style={{flexDirection: 'row', paddingBottom: 5}}>
+                            <Icon name="hashtag" size={20} color={'white'} />
+                            <Icon name="users" size={20} color={'white'} style={{marginLeft: 70}} />
+                            <Icon name="bitcoin" size={20} color={'white'} style={{marginLeft: 60}} />
+                            <Icon name="beer" size={20} color={'white'} style={{marginLeft: 15}} />
+                        </View>
+                        <FlatList
+                            data={this.state.playersForScore}
+                            keyExtractor={(item) => item.id.toString()}
+                            renderItem={this._renderItemScore}
+                            />  
+                    
+              </View>
+              </TouchableOpacity>
+              </Modal>
+
                     <View style={styles.header_container}>
                         <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '90%'}}>
                             <Text>{this.state.pledge.name}</Text>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => { this._setModalVisible(true); }}>
                                 <Image style={styles.trophy_image} source={require('../assets/images/cup-winner.png')} />
                             </TouchableOpacity>                            
                         </View>

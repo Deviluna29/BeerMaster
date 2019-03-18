@@ -56,21 +56,20 @@ class Parameters extends React.Component {
 
 const styles = StyleSheet.create({
     mainContainer: {
-        marginTop: 25,
+        marginTop: 55,
         marginBottom: 20,
         width: '90%',
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
     },
     title: {
-        color: 'white',
+        color: 'black',
         fontSize: 25,
         fontWeight: 'bold',
         margin: 10
     },
     parameter: {
-        color: 'white',
+        color: 'black',
         fontSize: 16
     },
     text_input: {

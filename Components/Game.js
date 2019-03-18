@@ -1,12 +1,10 @@
 
 import React from 'react'
-import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity, Modal, FlatList } from 'react-native'
+import { StyleSheet, View, Text, Image, TouchableOpacity, Modal, FlatList } from 'react-native'
 import { randomPledge } from '../helpers/pledgeHelper'
 import { connect } from 'react-redux'
-import Entypo from 'react-native-vector-icons/Entypo'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { compareValues } from '../helpers/functionsHelper'
-import cloneDeep from 'lodash/cloneDeep'
 
 class Game extends React.Component {
 
@@ -74,7 +72,8 @@ class Game extends React.Component {
 
     render() {
         return (
-            <ImageBackground source={this.state.pledge.theme} style={{width: '100%', height: '100%'}}>
+            
+            <View style={{ width: '100%', height: '100%', backgroundColor: this.state.pledge.theme}}>
                 <View style={styles.main_container}>
 
 
@@ -118,10 +117,10 @@ class Game extends React.Component {
                         </View>
                         <Text style={styles.player_name}>{this.state.players[this.state.currentPlayer].name}</Text>
                         <View style={{flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width:170}}>                          
-                          <Entypo name="star" size={30} color={'green'} />
-                          <Text style={styles.score}>{this.state.players[this.state.currentPlayer].totalPledge}</Text>
-                          <Entypo name="drink" size={30} color={'red'} />
-                          <Text style={styles.score}>{this.state.players[this.state.currentPlayer].totalDrink}</Text>
+                            <Image style={styles.trophy_image} source={require('../assets/images/medal.png')} />
+                            <Text style={styles.score}>{this.state.players[this.state.currentPlayer].totalPledge}</Text>
+                            <Image style={styles.trophy_image} source={require('../assets/images/beer.png')} />
+                            <Text style={styles.score}>{this.state.players[this.state.currentPlayer].totalDrink}</Text>
                         </View>
                     </View>
                     <View style={styles.bottom_container}>
@@ -131,15 +130,15 @@ class Game extends React.Component {
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
                             <TouchableOpacity onPress={() => this._pledgeButton()}  style={{flexDirection: 'row', justifyContent:'center', alignItems: 'center', marginLeft: 10, borderRadius: 4, borderWidth: 2, borderColor: '#fff', width: 100, height: 50, backgroundColor: 'rgba(180, 127, 4, 0.5)'}} >
-                                <Entypo name="star" size={20} color={'green'} />
+                            <Image style={styles.trophy_image} source={require('../assets/images/medal.png')} />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => this._drinkButton()}  style={{flexDirection: 'row', justifyContent:'center', alignItems: 'center', marginLeft: 25, borderRadius: 4, borderWidth: 2, borderColor: '#fff', width: 100, height: 50, backgroundColor: 'rgba(180, 89, 4, 0.5)'}} >
-                                <Entypo name="drink" size={20} color={'red'} />
+                                <Image style={styles.trophy_image} source={require('../assets/images/beer.png')} />
                             </TouchableOpacity>
                         </View>
                     </View>
                 </View>
-            </ImageBackground>
+            </View>
         )
     }   
 }

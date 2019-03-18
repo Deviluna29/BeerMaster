@@ -1,6 +1,7 @@
 
 import React from 'react'
 import { StyleSheet, View, Image, ImageBackground, TouchableOpacity, Text } from 'react-native'
+import SvgUri from 'react-native-svg-uri';
 
 export default class Home extends React.Component {
 
@@ -16,10 +17,13 @@ _displayParameters() {
         return (
           <ImageBackground source={require('../assets/images/background_home.png')} style={{width: '100%', height: '100%'}}>
             <View style={styles.mainContainer}>
-              <Image
-                style={styles.header_image}
-                source={require('../assets/images/beer_home.png')}
+            <View style={styles.header_image}>
+              <SvgUri
+                height="100"
+                width="100"            
+                source={require('../assets/images/champagne.svg')}
               />
+            </View>              
               <TouchableOpacity style={styles.button} onPress={() => {this._displayLobby()}}>
                 <Text style={styles.button_text}>Jouer</Text>
               </TouchableOpacity>
@@ -37,16 +41,13 @@ _displayParameters() {
 
 const styles = StyleSheet.create({
     mainContainer: {
-      marginTop: 50,
+      marginTop: 55,
       marginBottom: 20,
       flex: 1,
-      justifyContent: 'center',
       alignItems: 'center'
     },
     header_image: {
-      height: 150,
-      width: 200,
-      marginBottom: 50
+      marginBottom: 20,
     },
     button: {
       height: 30,
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center'
     },
     button_text: {
-      color: 'white',
+      color: 'black',
       fontSize: 25,
       fontWeight: 'bold'
     }

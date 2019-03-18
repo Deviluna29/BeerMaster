@@ -13,9 +13,9 @@ export function randomPledge(){
     }    
 }
 
-const QUESTIONS = require('../assets/images/background_game2.png')
-const ACTIONS = require('../assets/images/background_home.png')
-const VERITES = require('../assets/images/background_game3.png')
+const QUESTIONS = "#F5EE9E"
+const ACTIONS = "#AB3428"
+const VERITES = "#06D6A0"
 
 // Tèmes : Questions | Action | Vérité | Marques
 

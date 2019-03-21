@@ -1,8 +1,8 @@
 import React from 'react'
-import { StyleSheet, TextInput, View, FlatList, Button, ImageBackground, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, TextInput, View, FlatList, Button, ImageBackground, TouchableOpacity, Image, Text } from 'react-native'
 import Player from './Player'
 import { connect } from 'react-redux'
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import SvgUri from 'react-native-svg-uri';
 
 class Lobby extends React.Component {
 
@@ -56,9 +56,13 @@ class Lobby extends React.Component {
 
   _renderTypeGame() {
     if (this.state.typeGame === true) {
-      return <Button style={styles.start_Button} color='black' title='Par Tour' onPress={() => this. _switchGameType()}/>
+      return  <TouchableOpacity onPress={() => this. _switchGameType()} style={styles.start_Button}>
+                <Text style={styles.bottom_text}>PAR TOUR</Text>
+              </TouchableOpacity>
     } else {
-      return <Button style={styles.start_Button} color='black' title='Par Score' onPress={() => this. _switchGameType()}/>
+      return  <TouchableOpacity onPress={() => this. _switchGameType()} style={styles.start_Button}>
+                <Text style={styles.bottom_text}>PAR SCORE</Text>
+              </TouchableOpacity>
     }
   }
 
@@ -77,23 +81,33 @@ class Lobby extends React.Component {
               style={styles.text_input}
               ref={component => this._textInput = component}
               placeholder='Nom du joueur'
+              placeholderTextColor='white'
+              selectionColor='white'
               onChangeText={(text) => this.name = text}
               onSubmitEditing={() => {this._addPlayer()}}
               maxLength={14}
             />
-            <TouchableOpacity onPress={() => this._addPlayer()} style={styles.add_Button}>
-                <AntDesign name="plussquare" size={30} color={'green'} />
+            <TouchableOpacity onPress={() => this._addPlayer()} style={styles.add_Button}>                
+              <SvgUri
+                height="30"
+                width="30"            
+                source={require('../assets/images/add.svg')}
+              />
             </TouchableOpacity>
           </View>
           <FlatList
-          style={styles.flatlist}
+            style={styles.flatlist}
             data={this.props.playerReducer.players}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({item}) => <Player player={item}/>}
           />
           <View style={styles.bottom_container}>
-            <Button style={styles.start_Button} color='black' title='Delete' onPress={() => {this._deleteAllPlayers()}}/>
-            <Button style={styles.start_Button} color='black' title='Lancer le Jeu' onPress={() => this._displayTheGame()}/>
+          <TouchableOpacity onPress={() => this._deleteAllPlayers()} style={styles.start_Button}>
+            <Text style={styles.bottom_text}>DELETE</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => this._displayTheGame()} style={styles.start_Button}>
+            <Text style={styles.bottom_text}>JOUER</Text>
+          </TouchableOpacity>
             { this._renderTypeGame() }
           </View>
         </View>
@@ -121,28 +135,53 @@ const styles = StyleSheet.create({
     height: 40,
     marginLeft: 20,
     marginRight: 20,
-    margin: 5
+    margin: 5,
+    
   },
   text_input: {
     flex: 4,
     marginLeft: 5,
     marginRight: 5,
-    borderColor: '#000000',
-    borderWidth: 1,
-    paddingLeft: 5,
-    backgroundColor: 'white'
+    paddingLeft: 10,
+    borderLeftColor: 'rgba(0, 0, 0, 0.5)',
+    borderLeftWidth: 2,
+    borderBottomColor: 'rgba(0, 0, 0, 0.5)',
+    borderBottomWidth: 2,
+    borderBottomLeftRadius: 8,
+    fontSize: 16,
+    color: 'white'
+  },
+  flatlist: {
+    marginLeft: 25,
+    marginRight: 25,
+    marginBottom: 5,
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    borderRadius: 8
   },
   add_Button: {
     flex: 1,
-    margin: 5,
-    alignItems:'center'
+    marginRight: 10,
+    alignItems:'center',
+    justifyContent: 'center'
   },
   start_Button: {
-    margin: 10
+    marginRight: 10,
+    backgroundColor: 'yellow',
+    flexDirection: 'row',
+    backgroundColor: 'black',
+    borderRadius: 4
   },
   bottom_container: {
     flexDirection: 'row',
     justifyContent: 'center'
+  },
+  bottom_text: {
+    padding: 8,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 14,
   }
 })
 

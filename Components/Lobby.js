@@ -58,10 +58,20 @@ class Lobby extends React.Component {
     if (this.state.typeGame === true) {
       return  <TouchableOpacity onPress={() => this. _switchGameType()} style={styles.start_Button}>
                 <Text style={styles.bottom_text}>PAR TOUR</Text>
+                <SvgUri
+                  height="20"
+                  width="20"            
+                  source={require('../assets/images/reload.svg')}
+                />
               </TouchableOpacity>
     } else {
       return  <TouchableOpacity onPress={() => this. _switchGameType()} style={styles.start_Button}>
                 <Text style={styles.bottom_text}>PAR SCORE</Text>
+                <SvgUri
+                  height="20"
+                  width="20"            
+                  source={require('../assets/images/score.svg')}
+                />
               </TouchableOpacity>
     }
   }
@@ -103,10 +113,20 @@ class Lobby extends React.Component {
           />
           <View style={styles.bottom_container}>
           <TouchableOpacity onPress={() => this._deleteAllPlayers()} style={styles.start_Button}>
-            <Text style={styles.bottom_text}>DELETE</Text>
+            <Text style={styles.bottom_text}>RESET</Text>
+            <SvgUri
+              height="15"
+              width="15"            
+              source={require('../assets/images/reset.svg')}
+            />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this._displayTheGame()} style={styles.start_Button}>
             <Text style={styles.bottom_text}>JOUER</Text>
+            <SvgUri
+              height="15"
+              width="15"            
+              source={require('../assets/images/play-button.svg')}
+            />
           </TouchableOpacity>
             { this._renderTypeGame() }
           </View>
@@ -124,7 +144,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   header_container: {
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 5
   },
   header_image: {
     height: 80,
@@ -154,7 +175,8 @@ const styles = StyleSheet.create({
   flatlist: {
     marginLeft: 25,
     marginRight: 25,
-    marginBottom: 5,
+    marginBottom: 10,
+    marginTop: 5,
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
     borderRadius: 8
   },
@@ -164,17 +186,19 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent: 'center'
   },
-  start_Button: {
-    marginRight: 10,
-    backgroundColor: 'yellow',
-    flexDirection: 'row',
-    backgroundColor: 'black',
-    borderRadius: 4
-  },
   bottom_container: {
     flexDirection: 'row',
     justifyContent: 'center'
   },
+  start_Button: {
+    marginRight: 10,
+    flexDirection: 'row',
+    backgroundColor: 'black',
+    borderRadius: 8,
+    alignItems:'center',
+    justifyContent: 'center',
+    paddingRight: 5
+  },  
   bottom_text: {
     padding: 8,
     textAlign: 'center',

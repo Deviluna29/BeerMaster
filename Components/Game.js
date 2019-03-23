@@ -112,7 +112,7 @@ class Game extends React.Component {
                         <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '90%'}}>
                             <Text>{this.state.pledge.name}</Text>
                             <TouchableOpacity onPress={() => { this._setModalVisible(true); }}>
-                                <Image style={styles.trophy_image} source={require('../assets/images/cup-winner.png')} />
+                              <Image style={styles.trophy_image} source={require('../assets/images/cup-winner.png')} />
                             </TouchableOpacity>                            
                         </View>
                         <Text style={styles.player_name}>{this.state.players[this.state.currentPlayer].name}</Text>

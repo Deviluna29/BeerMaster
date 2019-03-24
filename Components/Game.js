@@ -19,7 +19,6 @@ class Game extends React.Component {
             maxScore: this.props.parameterReducer.parameters.nbrPointsMax,
             currentRound: 0,
             modalVisible: false,
-            playersForScore : this.props.playerReducer.players
          }
     }
 
@@ -33,8 +32,7 @@ class Game extends React.Component {
     );
 
     _setModalVisible(visible) {
-
-        this.state.playersForScore.sort(compareValues('totalPledge', 'desc'))
+        this.state.players.sort(compareValues('totalPledge', 'desc'))
         this.setState({modalVisible: visible});
       }
     
@@ -56,7 +54,6 @@ class Game extends React.Component {
 
     _pledgeButton(){
         this.state.players[this.state.currentPlayer].totalPledge += this.state.pledge.powerPledge
-        this.state.playersForScore[this.state.currentPlayer].totalPledge += this.state.pledge.powerPledge
         const action = { type: "SET_SCORE_PLAYER", value: [this.state.currentPlayer, this.state.players[this.state.currentPlayer]] }
         this.props.dispatch(action)
         this._loadNewPledge()
@@ -64,7 +61,6 @@ class Game extends React.Component {
 
     _drinkButton(){
         this.state.players[this.state.currentPlayer].totalDrink += this.state.pledge.powerDrink
-        this.state.playersForScore[this.state.currentPlayer].totalDrink += this.state.pledge.powerDrink
         const action = { type: "SET_SCORE_PLAYER", value: [this.state.currentPlayer, this.state.players[this.state.currentPlayer]] }
         this.props.dispatch(action)
         this._loadNewPledge()
@@ -72,72 +68,64 @@ class Game extends React.Component {
 
     render() {
         return (
-            
             <View style={{ width: '100%', height: '100%', backgroundColor: this.state.pledge.theme}}>
-                <View style={styles.main_container}>
-
-
+              <View style={styles.main_container}>
                 <Modal
-                
-          animationType="slide"
-          transparent={true}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-            this._setModalVisible(false);
-          }}
-          >
-                    <TouchableOpacity 
-            style={{marginTop: 50, flex: 1, alignItems: 'center'}}
-            activeOpacity={1} 
-            onPressOut={() => {this._setModalVisible(false)}}
-          >
-              <View style={{ padding: 10, marginTop: 20, borderRadius: 4, borderWidth: 2, borderColor: '#fff', backgroundColor: 'rgba(90, 188, 187, 0.7)', height: 200, width: 250 }}>
-                        <View style={{flexDirection: 'row', paddingBottom: 5}}>
-                            <Icon name="hashtag" size={20} color={'white'} />
-                            <Icon name="users" size={20} color={'white'} style={{marginLeft: 70}} />
-                            <Icon name="bitcoin" size={20} color={'white'} style={{marginLeft: 60}} />
-                            <Icon name="beer" size={20} color={'white'} style={{marginLeft: 15}} />
-                        </View>
-                        <FlatList
-                            data={this.state.playersForScore}
-                            keyExtractor={(item) => item.id.toString()}
-                            renderItem={this._renderItemScore}
-                            />  
-                    
-              </View>
-              </TouchableOpacity>
-              </Modal>
-
-                    <View style={styles.header_container}>
-                        <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '90%'}}>
-                            <Text>{this.state.pledge.name}</Text>
-                            <TouchableOpacity onPress={() => { this._setModalVisible(true); }}>
-                              <Image style={styles.trophy_image} source={require('../assets/images/cup-winner.png')} />
-                            </TouchableOpacity>                            
-                        </View>
-                        <Text style={styles.player_name}>{this.state.players[this.state.currentPlayer].name}</Text>
-                        <View style={{flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width:170}}>                          
-                            <Image style={styles.trophy_image} source={require('../assets/images/medal.png')} />
-                            <Text style={styles.score}>{this.state.players[this.state.currentPlayer].totalPledge}</Text>
-                            <Image style={styles.trophy_image} source={require('../assets/images/beer.png')} />
-                            <Text style={styles.score}>{this.state.players[this.state.currentPlayer].totalDrink}</Text>
-                        </View>
+                  animationType="slide"
+                  transparent={true}
+                  visible={this.state.modalVisible}
+                  onRequestClose={() => {this._setModalVisible(false);}}
+                >
+                  <TouchableOpacity 
+                    style={{marginTop: 50, flex: 1, alignItems: 'center'}}
+                    activeOpacity={1} 
+                    onPressOut={() => {this._setModalVisible(false)}}
+                  >
+                    <View style={{ padding: 10, marginTop: 20, borderRadius: 4, borderWidth: 2, borderColor: '#fff', backgroundColor: 'rgba(90, 188, 187, 0.7)', height: 200, width: 250 }}>
+                      <View style={{flexDirection: 'row', paddingBottom: 5}}>
+                        <Icon name="hashtag" size={20} color={'white'} />
+                        <Icon name="users" size={20} color={'white'} style={{marginLeft: 70}} />
+                        <Icon name="bitcoin" size={20} color={'white'} style={{marginLeft: 60}} />
+                        <Icon name="beer" size={20} color={'white'} style={{marginLeft: 15}} />
+                      </View>
+                      <FlatList
+                        data={this.state.players}
+                        keyExtractor={(item) => item.id.toString()}
+                        renderItem={this._renderItemScore}
+                      />
                     </View>
-                    <View style={styles.bottom_container}>
-                        <View style={{height: 360}}>
-                            <Text style={{ margin: 5, fontWeight: 'bold', textAlign: 'center', fontSize: 20}}>{this.state.pledge.name}</Text>
-                            <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 30}}>{this.state.players[this.state.currentPlayer].name} {this.state.pledge.desc}</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
-                            <TouchableOpacity onPress={() => this._pledgeButton()}  style={{flexDirection: 'row', justifyContent:'center', alignItems: 'center', marginLeft: 10, borderRadius: 4, borderWidth: 2, borderColor: '#fff', width: 100, height: 50, backgroundColor: 'rgba(180, 127, 4, 0.5)'}} >
-                            <Image style={styles.trophy_image} source={require('../assets/images/medal.png')} />
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => this._drinkButton()}  style={{flexDirection: 'row', justifyContent:'center', alignItems: 'center', marginLeft: 25, borderRadius: 4, borderWidth: 2, borderColor: '#fff', width: 100, height: 50, backgroundColor: 'rgba(180, 89, 4, 0.5)'}} >
-                                <Image style={styles.trophy_image} source={require('../assets/images/beer.png')} />
-                            </TouchableOpacity>
-                        </View>
-                    </View>
+                  </TouchableOpacity>
+                </Modal>
+                <View style={styles.header_container}>
+                  <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '90%'}}>
+                    <Text>{this.state.pledge.name}</Text>
+                    <TouchableOpacity onPress={() => { this._setModalVisible(true); }}>
+                      <Image style={styles.trophy_image} source={require('../assets/images/cup-winner.png')} />
+                    </TouchableOpacity>                            
+                  </View>
+                  <Text style={styles.player_name}>{this.state.players[this.state.currentPlayer].name}</Text>
+                  <View style={{flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width:170}}>                          
+                    <Image style={styles.trophy_image} source={require('../assets/images/medal.png')} />
+                    <Text style={styles.score}>{this.state.players[this.state.currentPlayer].totalPledge}</Text>
+                    <Image style={styles.trophy_image} source={require('../assets/images/beer.png')} />
+                    <Text style={styles.score}>{this.state.players[this.state.currentPlayer].totalDrink}</Text>
+                  </View>
                 </View>
+                <View style={styles.bottom_container}>
+                  <View style={{height: 360}}>
+                    <Text style={{ margin: 5, fontWeight: 'bold', textAlign: 'center', fontSize: 20}}>{this.state.pledge.name}</Text>
+                    <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 30}}>{this.state.players[this.state.currentPlayer].name} {this.state.pledge.desc}</Text>
+                  </View>
+                  <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
+                    <TouchableOpacity onPress={() => this._pledgeButton()}  style={{flexDirection: 'row', justifyContent:'center', alignItems: 'center', marginLeft: 10, borderRadius: 4, borderWidth: 2, borderColor: '#fff', width: 100, height: 50, backgroundColor: 'rgba(180, 127, 4, 0.5)'}} >
+                      <Image style={styles.trophy_image} source={require('../assets/images/medal.png')} />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => this._drinkButton()}  style={{flexDirection: 'row', justifyContent:'center', alignItems: 'center', marginLeft: 25, borderRadius: 4, borderWidth: 2, borderColor: '#fff', width: 100, height: 50, backgroundColor: 'rgba(180, 89, 4, 0.5)'}} >
+                      <Image style={styles.trophy_image} source={require('../assets/images/beer.png')} />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
             </View>
         )
     }   

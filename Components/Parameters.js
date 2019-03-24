@@ -15,6 +15,7 @@ class Parameters extends React.Component {
     _modifyParameters() {
         const action = { type: "MODIFY_PARAMETERS", value: {nbrTourMax: this.nbrTours, nbrPointsMax: this.nbrPoints } }
         this.props.dispatch(action)
+        this.props.navigation.navigate("Home");
     }
 
   render() {
@@ -28,6 +29,7 @@ class Parameters extends React.Component {
                         style={styles.text_input}
                         defaultValue={this.nbrTours}
                         placeholder='...'
+                        placeholderTextColor='white'
                         onChangeText={(text) => this.nbrTours = text}
                         maxLength={3}
                         keyboardType='numeric'
@@ -75,10 +77,14 @@ const styles = StyleSheet.create({
     text_input: {
         marginLeft: 5,
         marginRight: 5,
-        borderColor: '#000000',
-        borderWidth: 1,
-        paddingLeft: 5,
-        backgroundColor: 'white'
+        paddingLeft: 10,
+        borderLeftColor: 'rgba(0, 0, 0, 0.5)',
+        borderLeftWidth: 2,
+        borderBottomColor: 'rgba(0, 0, 0, 0.5)',
+        borderBottomWidth: 2,
+        borderBottomLeftRadius: 8,
+        fontSize: 16,
+        color: 'white'
     },
     validate_Button: {
         margin: 10,

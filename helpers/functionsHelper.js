@@ -1,5 +1,3 @@
-
-
 export function compareValues(key, order='asc') {
     return function(a, b) {
       if(!a.hasOwnProperty(key) || 

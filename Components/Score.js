@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { StyleSheet, View, Text, Image, FlatList, BackHandler} from 'react-native'
+import { StyleSheet, View, Text, Image, FlatList, BackHandler, TouchableOpacity} from 'react-native'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import cloneDeep from 'lodash/cloneDeep'
@@ -18,16 +18,19 @@ class Score extends React.Component {
 
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-      }
+    }
     
-      componentWillUnmount() {
+    componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
-      }
+    }
     
-      handleBackPress = () => {
-        
-        return true;
-      }
+    handleBackPress = () => {        
+      return true;
+    }
+
+    _displayHome() {
+      this.props.navigation.navigate("Home");
+    }
 
     _renderItem = ({item, index}) => (
         <View style={{ flexDirection: 'row',  paddingBottom: 5, borderTopWidth: 1, borderTopColor: '#fff'}}>
@@ -36,7 +39,7 @@ class Score extends React.Component {
             <Text style={{fontWeight: 'bold', textAlign: 'center', width: 30}}>{item.totalPledge}</Text>
             <Text style={{fontWeight: 'bold', textAlign: 'center', width: 30}}>{item.totalDrink}</Text>
         </View>
-      );
+    );
 
     render() {
         return (
@@ -56,6 +59,9 @@ class Score extends React.Component {
                             renderItem={this._renderItem}
                             />      
                     </View>
+                    <TouchableOpacity style={styles.button} onPress={() => {this._displayHome()}}>
+                      <Text style={styles.button_text}>Home</Text>
+                    </TouchableOpacity>
                 </View>
         )
     }
@@ -67,6 +73,20 @@ const styles = StyleSheet.create({
       width: 50,
       height: 50,
     },
+    button: {
+      margin: 5,
+      justifyContent: 'center',
+      borderColor: 'rgba(255, 255, 255, 0.5)',
+      borderWidth: 2,
+      borderRadius: 10,
+    },
+    button_text: {
+      color: 'black',
+      fontSize: 20,
+      fontWeight: 'bold',
+      fontWeight: 'bold',
+      margin: 5
+    }
   });
 
 const mapStateToProps = (state) => {

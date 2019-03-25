@@ -5,6 +5,8 @@ import { randomPledge } from '../helpers/pledgeHelper'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { compareValues } from '../helpers/functionsHelper'
+import SvgUri from 'react-native-svg-uri';
+import { Badge } from 'react-native-elements'
 
 class Game extends React.Component {
 
@@ -17,8 +19,8 @@ class Game extends React.Component {
             currentPlayer: 0,
             maxRound: this.props.parameterReducer.parameters.nbrTourMax,
             maxScore: this.props.parameterReducer.parameters.nbrPointsMax,
-            currentRound: 0,
-            modalVisible: false,
+            currentRound: 1,
+            modalVisible: false
          }
     }
 
@@ -47,7 +49,7 @@ class Game extends React.Component {
             newCurrentRound++;
             newCurrentPlayer = 0;
         }
-        if(this.typeGame === true && newCurrentRound >= this.state.maxRound) this._displayFinalScore()
+        if(this.typeGame === true && newCurrentRound > this.state.maxRound) this._displayFinalScore()
         else if (this.typeGame === false && this.state.players[0].totalPledge >= this.state.maxScore)  this._displayFinalScore()
         else this.setState({ pledge: randomPledge(), currentPlayer: newCurrentPlayer, currentRound: newCurrentRound})
     }
@@ -66,6 +68,22 @@ class Game extends React.Component {
         this._loadNewPledge()
     }
 
+    _renderScore() {
+      if (this.typeGame === false) {
+        return <Text style={styles.score}>{this.state.players[this.state.currentPlayer].totalPledge} /{this.state.maxScore}</Text>
+      } else {
+        return <Text style={styles.score}>{this.state.players[this.state.currentPlayer].totalPledge}</Text>
+      }
+    }
+
+    _renderRound() {
+      if (this.typeGame === true) {
+        return <Text>Tour n° {this.state.currentRound} /{this.state.maxRound}</Text>
+      } else {
+        return <Text>Tour n° {this.state.currentRound}</Text>
+      }
+    }
+
     render() {
         return (
             <View style={{ width: '100%', height: '100%', backgroundColor: this.state.pledge.theme}}>
@@ -81,7 +99,7 @@ class Game extends React.Component {
                     activeOpacity={1} 
                     onPressOut={() => {this._setModalVisible(false)}}
                   >
-                    <View style={{ padding: 10, marginTop: 20, borderRadius: 4, borderWidth: 2, borderColor: '#fff', backgroundColor: 'rgba(90, 188, 187, 0.7)', height: 200, width: 250 }}>
+                    <View style={{ padding: 10, marginTop: 20, borderRadius: 4, borderWidth: 2, borderColor: '#fff', backgroundColor: 'rgba(90, 188, 187, 0.9)', width: 250 }}>
                       <View style={{flexDirection: 'row', paddingBottom: 5}}>
                         <Icon name="hashtag" size={20} color={'white'} />
                         <Icon name="users" size={20} color={'white'} style={{marginLeft: 70}} />
@@ -99,31 +117,55 @@ class Game extends React.Component {
                 <View style={styles.header_container}>
                   <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '90%'}}>
                     <Text>{this.state.pledge.name}</Text>
+                    { this._renderRound() }                    
                     <TouchableOpacity onPress={() => { this._setModalVisible(true); }}>
                       <Image style={styles.trophy_image} source={require('../assets/images/cup-winner.png')} />
                     </TouchableOpacity>                            
                   </View>
                   <Text style={styles.player_name}>{this.state.players[this.state.currentPlayer].name}</Text>
-                  <View style={{flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width:170}}>                          
-                    <Image style={styles.trophy_image} source={require('../assets/images/medal.png')} />
-                    <Text style={styles.score}>{this.state.players[this.state.currentPlayer].totalPledge}</Text>
-                    <Image style={styles.trophy_image} source={require('../assets/images/beer.png')} />
-                    <Text style={styles.score}>{this.state.players[this.state.currentPlayer].totalDrink}</Text>
+                  <View style={{flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width:'80%'}}>
+                    <View style={{flexDirection: 'row'}}>
+                      <Image style={styles.score_image} source={require('../assets/images/medal.png')} />
+                      { this._renderScore() }                      
+                    </View>                        
+                    <View style={{flexDirection: 'row'}}>
+                      <Image style={styles.score_image} source={require('../assets/images/beer.png')} />
+                      <Text style={styles.score}>{this.state.players[this.state.currentPlayer].totalDrink}</Text>
+                    </View>                    
                   </View>
                 </View>
                 <View style={styles.bottom_container}>
-                  <View style={{height: 360}}>
-                    <Text style={{ margin: 5, fontWeight: 'bold', textAlign: 'center', fontSize: 20}}>{this.state.pledge.name}</Text>
-                    <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 30}}>{this.state.players[this.state.currentPlayer].name} {this.state.pledge.desc}</Text>
-                  </View>
-                  <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
-                    <TouchableOpacity onPress={() => this._pledgeButton()}  style={{flexDirection: 'row', justifyContent:'center', alignItems: 'center', marginLeft: 10, borderRadius: 4, borderWidth: 2, borderColor: '#fff', width: 100, height: 50, backgroundColor: 'rgba(180, 127, 4, 0.5)'}} >
-                      <Image style={styles.trophy_image} source={require('../assets/images/medal.png')} />
+                    <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 30, color: 'white'}}>{this.state.players[this.state.currentPlayer].name} {this.state.pledge.desc}</Text>                 
+                </View>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width: '80%'}}>
+                    <TouchableOpacity onPress={() => this._drinkButton()} style={styles.choice_Button}>
+                      <View>
+                        <SvgUri
+                          height="50"
+                          width="50"            
+                          source={require('../assets/images/cross.svg')}
+                        />
+                        <Badge
+                          value= {'+ ' + this.state.pledge.powerDrink} status="error" 
+                          containerStyle={{ position: 'absolute', bottom: -4, right: -20 }}
+                        />
+                      </View>                      
+                      <Image style={styles.miniature_score_image} source={require('../assets/images/beer.png')} />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => this._drinkButton()}  style={{flexDirection: 'row', justifyContent:'center', alignItems: 'center', marginLeft: 25, borderRadius: 4, borderWidth: 2, borderColor: '#fff', width: 100, height: 50, backgroundColor: 'rgba(180, 89, 4, 0.5)'}} >
-                      <Image style={styles.trophy_image} source={require('../assets/images/beer.png')} />
+                    <TouchableOpacity onPress={() => this._pledgeButton()} style={styles.choice_Button}>                      
+                      <View>
+                        <SvgUri
+                          height="50"
+                          width="50"            
+                          source={require('../assets/images/validate.svg')}
+                        />
+                        <Badge
+                          value= {'+ ' + this.state.pledge.powerPledge} status="success" 
+                          containerStyle={{ position: 'absolute', bottom: -4, right: -20 }}
+                        />                        
+                      </View>
+                      <Image style={styles.miniature_score_image} source={require('../assets/images/medal.png')} />
                     </TouchableOpacity>
-                  </View>
                 </View>
               </View>
             </View>
@@ -140,9 +182,20 @@ const styles = StyleSheet.create({
       alignItems: 'center'
     },
     trophy_image: {
-        width: 30,
-        height: 30
-      },
+      width: 30,
+      height: 30
+    },
+    score_image: {
+      width: 30,
+      height: 30,
+      marginLeft: 10,
+      marginRight: 10
+    },
+    miniature_score_image: {
+      width: 20,
+      height: 20,
+      marginLeft: 5
+    },
     header_container: {
       width: '100%',
       height: '25%',
@@ -167,13 +220,17 @@ const styles = StyleSheet.create({
       fontSize: 25
     },
     bottom_container: {
+      height: 360,
+      padding: 10,
+      marginLeft: 25,
+      marginRight: 25,
+      marginBottom: 10,
       marginTop: 15,
-      borderRadius: 4,
-      borderWidth: 2,
-      borderColor: '#fff',
-      backgroundColor: 'rgba(255, 255, 255, 0.5)',
-      height: 420,
-      width: 300
+      backgroundColor: 'rgba(0, 0, 0, 0.7)',
+      borderRadius: 8
+    },
+    choice_Button: {
+      flexDirection: 'row'
     }
   })
 

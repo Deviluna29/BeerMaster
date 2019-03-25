@@ -46,7 +46,7 @@ class Score extends React.Component {
                 <View style={{ flex: 1, alignItems: 'center', paddingTop: 50, backgroundColor: "#5abcbb"}}>
                     <Image style={styles.header_image} source={require('../assets/images/cup-winner.png')} />
                     <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 30, width: 200}}>{this.state.players[0].name}</Text>
-                    <View style={{ padding: 10, marginTop: 20, borderRadius: 4, borderWidth: 2, borderColor: '#fff', backgroundColor: 'rgba(255, 255, 255, 0.5)', height: 200, width: 250 }}>
+                    <View style={{ padding: 10, marginTop: 20, borderRadius: 4, borderWidth: 2, borderColor: '#fff', backgroundColor: 'rgba(255, 255, 255, 0.5)', width: 250 }}>
                         <View style={{flexDirection: 'row', paddingBottom: 5}}>
                             <Icon name="hashtag" size={20} color={'white'} />
                             <Icon name="users" size={20} color={'white'} style={{marginLeft: 70}} />

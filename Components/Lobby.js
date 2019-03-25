@@ -112,23 +112,23 @@ class Lobby extends React.Component {
             renderItem={({item}) => <Player player={item}/>}
           />
           <View style={styles.bottom_container}>
-          <TouchableOpacity onPress={() => this._deleteAllPlayers()} style={styles.start_Button}>
-            <Text style={styles.bottom_text}>RESET</Text>
-            <SvgUri
-              height="15"
-              width="15"            
-              source={require('../assets/images/reset.svg')}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this._displayTheGame()} style={styles.start_Button}>
-            <Text style={styles.bottom_text}>JOUER</Text>
-            <SvgUri
-              height="15"
-              width="15"            
-              source={require('../assets/images/play-button.svg')}
-            />
-          </TouchableOpacity>
-            { this._renderTypeGame() }
+            <TouchableOpacity onPress={() => this._deleteAllPlayers()} style={styles.start_Button}>
+              <Text style={styles.bottom_text}>RESET</Text>
+              <SvgUri
+                height="15"
+                width="15"            
+                source={require('../assets/images/reset.svg')}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this._displayTheGame()} style={styles.start_Button}>
+              <Text style={styles.bottom_text}>JOUER</Text>
+              <SvgUri
+                height="15"
+                width="15"            
+                source={require('../assets/images/play-button.svg')}
+              />
+            </TouchableOpacity>
+              { this._renderTypeGame() }
           </View>
         </View>
       </ImageBackground>
@@ -191,7 +191,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   start_Button: {
-    marginRight: 10,
+    marginRight: 5,
+    marginLeft: 5,
     flexDirection: 'row',
     backgroundColor: 'black',
     borderRadius: 8,

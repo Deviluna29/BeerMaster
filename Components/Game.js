@@ -1,12 +1,11 @@
 
 import React from 'react'
-import { StyleSheet, View, Text, Image, TouchableOpacity, Modal, FlatList } from 'react-native'
+import { StyleSheet, View, Text, Image, TouchableOpacity, Modal, FlatList, ImageBackground } from 'react-native'
 import { randomPledge } from '../helpers/pledgeHelper'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { compareValues } from '../helpers/functionsHelper'
 import SvgUri from 'react-native-svg-uri';
-import { Badge } from 'react-native-elements'
 
 class Game extends React.Component {
 
@@ -70,24 +69,25 @@ class Game extends React.Component {
 
     _renderScore() {
       if (this.typeGame === false) {
-        return <Text style={styles.score}>{this.state.players[this.state.currentPlayer].totalPledge} /{this.state.maxScore}</Text>
+        return <Text style={styles.score_point}>{this.state.players[this.state.currentPlayer].totalPledge} /{this.state.maxScore}</Text>
       } else {
-        return <Text style={styles.score}>{this.state.players[this.state.currentPlayer].totalPledge}</Text>
+        return <Text style={styles.score_point}>{this.state.players[this.state.currentPlayer].totalPledge}</Text>
       }
     }
 
     _renderRound() {
       if (this.typeGame === true) {
-        return <Text>Tour n° {this.state.currentRound} /{this.state.maxRound}</Text>
+        return <Text style={{fontWeight: 'bold', fontSize: 18, marginLeft: 5}}>{this.state.currentRound} /{this.state.maxRound}</Text>
       } else {
-        return <Text>Tour n° {this.state.currentRound}</Text>
+        return <Text style={{fontWeight: 'bold', fontSize: 18, marginLeft: 5}}>{this.state.currentRound}</Text>
       }
     }
 
     render() {
         return (
-            <View style={{ width: '100%', height: '100%', backgroundColor: this.state.pledge.theme}}>
+          <ImageBackground source={require('../assets/images/background_home.png')} style={{width: '100%', height: '100%'}}>
               <View style={styles.main_container}>
+                {/** POP UP SCORE */}
                 <Modal
                   animationType="slide"
                   transparent={true}
@@ -114,61 +114,89 @@ class Game extends React.Component {
                     </View>
                   </TouchableOpacity>
                 </Modal>
+
+                {/** TOP */}
                 <View style={styles.header_container}>
+                  {/** ENTÊTE */}
                   <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '90%'}}>
-                    <Text>{this.state.pledge.name}</Text>
-                    { this._renderRound() }                    
-                    <TouchableOpacity onPress={() => { this._setModalVisible(true); }}>
+                    <View style={{flex: 1, flexDirection: 'row'}}>
+                        <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', borderBottomWidth: 2, borderRightWidth: 2, borderBottomRightRadius: 8, padding: 3}}>
+                            <Text style={{marginRight: 5, fontWeight: 'bold', fontSize: 18}}>{this.state.pledge.name}</Text>
+                            <SvgUri
+                              height="25"
+                              width="25"            
+                              source={require('../assets/images/question.svg')}
+                            />
+                        </View>                        
+                    </View>
+                    <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+                        <SvgUri
+                          height="25"
+                          width="25"            
+                          source={require('../assets/images/reload.svg')}
+                        />
+                        { this._renderRound() } 
+                    </View>           
+                    <TouchableOpacity style={{flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={() => { this._setModalVisible(true); }}>
                       <Image style={styles.trophy_image} source={require('../assets/images/cup-winner.png')} />
                     </TouchableOpacity>                            
                   </View>
-                  <Text style={styles.player_name}>{this.state.players[this.state.currentPlayer].name}</Text>
-                  <View style={{flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width:'80%'}}>
-                    <View style={{flexDirection: 'row'}}>
-                      <Image style={styles.score_image} source={require('../assets/images/medal.png')} />
-                      { this._renderScore() }                      
-                    </View>                        
-                    <View style={{flexDirection: 'row'}}>
-                      <Image style={styles.score_image} source={require('../assets/images/beer.png')} />
-                      <Text style={styles.score}>{this.state.players[this.state.currentPlayer].totalDrink}</Text>
-                    </View>                    
+                  {/** INFOS JOUEUR */}
+                  <View style={{flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', width: '90%'}}>
+                      <Text style={styles.player_name}>{this.state.players[this.state.currentPlayer].name}</Text>
+                      <View style={{flexDirection: 'row'}}>
+                          <SvgUri
+                            height="50"
+                            width="50"            
+                            source={require('../assets/images/robot.svg')}
+                          />                      
+                          <View style={{flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', marginLeft: 8}}>
+                              <View style={{flexDirection: 'row'}}>
+                                  <Image style={styles.score_image} source={require('../assets/images/medal.png')} />
+                                  { this._renderScore() }                      
+                              </View>                        
+                              <View style={{flexDirection: 'row'}}>
+                                  <Image style={styles.score_image} source={require('../assets/images/beer.png')} />
+                                  <Text style={styles.score_drink}>{this.state.players[this.state.currentPlayer].totalDrink}</Text>
+                              </View>                    
+                          </View>
+                      </View>
+                      
                   </View>
                 </View>
+
+                {/** JEU */}
                 <View style={styles.bottom_container}>
-                    <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 30, color: 'white'}}>{this.state.players[this.state.currentPlayer].name} {this.state.pledge.desc}</Text>                 
+                    <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 30, color: 'white'}}>{this.state.players[this.state.currentPlayer].name} : {this.state.pledge.desc}</Text>                 
                 </View>
+
+                {/** BOUTONS */}
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width: '80%'}}>
-                    <TouchableOpacity onPress={() => this._drinkButton()} style={styles.choice_Button}>
-                      <View>
+                    <TouchableOpacity onPress={() => this._drinkButton()} style={styles.choice_Button}>                      
                         <SvgUri
-                          height="50"
-                          width="50"            
+                          height="35"
+                          width="35"            
                           source={require('../assets/images/cross.svg')}
                         />
-                        <Badge
-                          value= {'+ ' + this.state.pledge.powerDrink} status="error" 
-                          containerStyle={{ position: 'absolute', bottom: -4, right: -20 }}
-                        />
-                      </View>                      
-                      <Image style={styles.miniature_score_image} source={require('../assets/images/beer.png')} />
+                        <View style={{justifyContent: 'center', alignItems: 'center', marginLeft: 10}}>                          
+                          <Image style={styles.miniature_score_image} source={require('../assets/images/beer.png')} />
+                          <Text style={styles.bottom_text_cross}>+ {this.state.pledge.powerDrink}</Text>
+                        </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => this._pledgeButton()} style={styles.choice_Button}>                      
-                      <View>
+                    <TouchableOpacity onPress={() => this._pledgeButton()} style={styles.choice_Button}>
                         <SvgUri
                           height="50"
                           width="50"            
                           source={require('../assets/images/validate.svg')}
                         />
-                        <Badge
-                          value= {'+ ' + this.state.pledge.powerPledge} status="success" 
-                          containerStyle={{ position: 'absolute', bottom: -4, right: -20 }}
-                        />                        
-                      </View>
-                      <Image style={styles.miniature_score_image} source={require('../assets/images/medal.png')} />
+                        <View style={{justifyContent: 'center', alignItems: 'center', marginLeft: 10}}>                          
+                          <Image style={styles.miniature_score_image} source={require('../assets/images/medal.png')} />
+                          <Text style={styles.bottom_text_validate}>+ {this.state.pledge.powerPledge}</Text>
+                        </View>
                     </TouchableOpacity>
                 </View>
               </View>
-            </View>
+            </ImageBackground>
         )
     }   
 }
@@ -186,15 +214,14 @@ const styles = StyleSheet.create({
       height: 30
     },
     score_image: {
-      width: 30,
-      height: 30,
-      marginLeft: 10,
-      marginRight: 10
+      width: 25,
+      height: 25,
+      marginRight: 8
     },
     miniature_score_image: {
-      width: 20,
-      height: 20,
-      marginLeft: 5
+      width: 25,
+      height: 25,
+      marginBottom: 5
     },
     header_container: {
       width: '100%',
@@ -208,29 +235,63 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       borderWidth: 2,
       borderColor: 'white',
-      backgroundColor: 'black',
+      backgroundColor: 'rgba(0, 0, 0, 0.7)',
       color: 'white',
       fontSize: 25,
-      width: '105%',
-      height:50
+      borderRadius: 20,
+      width: '100%',
+      marginBottom: 10
     },
-    score: {
+    score_point: {
       textAlign: 'center',
       textAlignVertical: 'center',
-      fontSize: 25
+      fontSize: 18,
+      fontWeight: 'bold',
+      color: 'green'
+    },
+    score_drink: {
+      textAlign: 'center',
+      textAlignVertical: 'center',
+      fontSize: 18,
+      fontWeight: 'bold',
+      color: 'red'
     },
     bottom_container: {
       height: 360,
-      padding: 10,
-      marginLeft: 25,
-      marginRight: 25,
+      padding: 15,
+      width: '90%',
       marginBottom: 10,
-      marginTop: 15,
+      marginTop: 10,
       backgroundColor: 'rgba(0, 0, 0, 0.7)',
-      borderRadius: 8
+      borderRadius: 8,
+      alignItems: 'center',
+      justifyContent: 'center'
     },
     choice_Button: {
-      flexDirection: 'row'
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'rgba(0, 0, 0, 0.7)',
+      padding: 8,
+      borderRadius: 8,
+    },
+    bottom_text_cross: {
+      color: 'white',
+      paddingLeft: 5,
+      paddingRight: 5,
+      borderWidth: 1,
+      borderColor: 'white',
+      backgroundColor: 'red',
+      borderRadius: 20
+    },
+    bottom_text_validate: {
+      color: 'white',
+      paddingLeft: 5,
+      paddingRight: 5,
+      borderWidth: 1,
+      borderColor: 'white',
+      backgroundColor: 'green',
+      borderRadius: 20
     }
   })
 

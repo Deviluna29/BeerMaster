@@ -24,10 +24,10 @@ _displayParameters() {
               <View style={styles.header_image}>
                 <SvgUri
                   height="100"
-                  width="100"            
+                  width="100"
                   source={require('../assets/images/champagne.svg')}
                 />
-              </View>              
+              </View> 
                 <TouchableOpacity style={styles.button} onPress={() => {this._displayLobby()}}>
                   <Text style={styles.button_text}>Jouer</Text>
                 </TouchableOpacity>

@@ -78,19 +78,17 @@ class Game extends React.Component {
 
     _renderRound() {
       if (this.typeGame === true) {
-        return <Text style={{fontWeight: 'bold', fontSize: 18, marginLeft: 5}}>{this.state.currentRound} /{this.state.maxRound}</Text>
+        return <Text style={{fontWeight: 'bold', fontSize: 18, marginLeft: 5, color: this.state.pledge.theme}}>{this.state.currentRound} /{this.state.maxRound}</Text>
       } else {
-        return <Text style={{fontWeight: 'bold', fontSize: 18, marginLeft: 5}}>{this.state.currentRound}</Text>
+        return <Text style={{fontWeight: 'bold', fontSize: 18, marginLeft: 5, color: this.state.pledge.theme}}>{this.state.currentRound}</Text>
       }
     }
 
     _renderBottomGame() {
       if (this.state.pledge.name === "Question" && !this.state.responseDisplayed) {
         return (
-          <TouchableOpacity onPress={() => this.setState({responseDisplayed: true})} style={styles.choice_Button}>
-              <View style={{justifyContent: 'center', alignItems: 'center', marginLeft: 10}}>
+          <TouchableOpacity onPress={() => this.setState({responseDisplayed: true})} style={styles.response_Button}>
                 <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 20, color: 'white'}}>Afficher la réponse</Text>
-              </View>
           </TouchableOpacity>
         )
       } else {
@@ -133,7 +131,7 @@ class Game extends React.Component {
 
     render() {
         return (
-          <ImageBackground source={require('../assets/images/background_home.png')} style={{width: '100%', height: '100%'}}>
+          <View style={{width: '100%', height: '100%', backgroundColor: this.state.pledge.theme}}>
               <View style={styles.main_container}>
                 {/** POP UP SCORE */}
                 <Modal
@@ -166,26 +164,26 @@ class Game extends React.Component {
                 {/** TOP */}
                 <View style={styles.header_container}>
                   {/** ENTÊTE */}
-                  <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '90%'}}>
+                  <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '90%', backgroundColor: 'rgba(0, 0, 0, 0.7)', padding: 5, borderRadius: 8}}>
                     <View style={{flex: 1, flexDirection: 'row'}}>
-                        <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', borderBottomWidth: 2, borderRightWidth: 2, borderBottomRightRadius: 8, padding: 3}}>
-                            <Text style={{marginRight: 5, fontWeight: 'bold', fontSize: 18}}>{this.state.pledge.name}</Text>
-                            <SvgUri
-                              height="25"
-                              width="25"            
-                              source={require('../assets/images/question.svg')}
-                            />
-                        </View>                        
+                          <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', borderRightWidth: 2, padding: 3, borderColor: this.state.pledge.theme}}>
+                              <Text style={{marginRight: 5, fontWeight: 'bold', fontSize: 18, color: this.state.pledge.theme}}>{this.state.pledge.name}</Text>
+                              <SvgUri
+                                height="25"
+                                width="25"            
+                                source={require('../assets/images/question.svg')}
+                              />
+                          </View>                        
                     </View>
                     <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                        <SvgUri
-                          height="25"
-                          width="25"            
-                          source={require('../assets/images/reload.svg')}
-                        />
-                        { this._renderRound() } 
-                    </View>           
-                    <TouchableOpacity style={{flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={() => { this._setModalVisible(true); }}>
+                          <SvgUri
+                            height="25"
+                            width="25"            
+                            source={require('../assets/images/reload.svg')}
+                          />
+                          { this._renderRound() } 
+                    </View>        
+                    <TouchableOpacity style={{flex: 1, justifyContent: 'center', alignItems: 'flex-end'}} onPress={() => { this._setModalVisible(true); }}>
                       <Image style={styles.trophy_image} source={require('../assets/images/cup-winner.png')} />
                     </TouchableOpacity>                            
                   </View>
@@ -215,14 +213,14 @@ class Game extends React.Component {
 
                 {/** JEU */}
                 <View style={styles.bottom_container}>
-                    <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 30, color: 'white'}}>{this.state.players[this.state.currentPlayer].name} : {this.state.pledge.desc}</Text>
+                    <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 30, color: this.state.pledge.theme}}>{this.state.players[this.state.currentPlayer].name} : {this.state.pledge.desc}</Text>
                     {this._renderResponse()}               
                 </View>
 
                 {/** BOTTOM */}
                 {this._renderBottomGame()}
               </View>
-            </ImageBackground>
+            </View>
         )
     }   
 }
@@ -259,14 +257,13 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       textAlignVertical: 'center',
       fontWeight: 'bold',
-      borderWidth: 2,
+      borderBottomWidth: 2,
       borderColor: 'white',
-      backgroundColor: 'rgba(0, 0, 0, 0.7)',
       color: 'white',
       fontSize: 25,
-      borderRadius: 20,
-      width: '100%',
-      marginBottom: 10
+      marginBottom: 10,
+      paddingLeft: 8,
+      paddingRight: 8
     },
     score_point: {
       textAlign: 'center',
@@ -297,6 +294,11 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
+      backgroundColor: 'rgba(0, 0, 0, 0.7)',
+      padding: 8,
+      borderRadius: 8,
+    },
+    response_Button: {
       backgroundColor: 'rgba(0, 0, 0, 0.7)',
       padding: 8,
       borderRadius: 8,

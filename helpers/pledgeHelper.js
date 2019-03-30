@@ -13,9 +13,9 @@ export function randomPledge(){
     }    
 }
 
-const QUESTIONS = "#F5EE9E"
-const ACTIONS = "#AB3428"
-const VERITES = "#06D6A0"
+const QUESTIONS = "#29a7b6"
+const ACTIONS = "#d55122"
+const VERITES = "#38ba78"
 
 // Tèmes : Questions | Action | Vérité | Marques
 

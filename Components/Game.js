@@ -213,7 +213,7 @@ class Game extends React.Component {
                 {/** JEU */}
                 <View style={styles.bottom_container}>
                     <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 30, color: this.state.pledge.theme}}>{this.state.players[this.state.currentPlayer].name} : {this.state.pledge.desc}</Text>
-                    {this._renderResponse()}               
+                    {this._renderResponse()}
                 </View>
 
                 {/** BOTTOM */}

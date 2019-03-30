@@ -36,7 +36,7 @@ export const avatarList = [
 
 const pledgesQuestions = [
     {id:0,name:"Question",desc:"Quelle est la vitesse de la lumière ?",powerPledge: 1, powerDrink: 1, theme: colorQuestion, icon: iconQuestion, response: "300 000 km/s"},
-    {id:1,name:"Question",desc:"Quelles sont les 2 couleurs du drapeau Canadien",powerPledge: 1, powerDrink: 1, theme: colorQuestion, icon: iconQuestion, response: "Rouge et Blanc"},
+    {id:1,name:"Question",desc:"Quelles sont les 2 couleurs du drapeau Canadien ?",powerPledge: 1, powerDrink: 1, theme: colorQuestion, icon: iconQuestion, response: "Rouge et Blanc"},
     {id:2,name:"Question",desc:"Combien d'étoiles y a t'il sur le drapeau Américain ?",powerPledge: 1, powerDrink: 1, theme: colorQuestion, icon: iconQuestion, response: "50"},
     {id:3,name:"Question",desc:"Combien font 3 + 2 x 0 ?",powerPledge: 1, powerDrink: 1, theme: colorQuestion, icon: iconQuestion, response: "3"}
 ]

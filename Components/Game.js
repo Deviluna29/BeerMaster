@@ -26,10 +26,10 @@ class Game extends React.Component {
 
     _renderItemScore = ({item, index}) => (
       <View style={{ flexDirection: 'row',  paddingBottom: 5, borderTopWidth: 1, borderTopColor: '#fff'}}>
-          <Text style={{textAlign: 'center', fontWeight: 'bold', width: 15}}>{index+1}</Text>
-          <Text style={{textAlign: 'center', fontWeight: 'bold', justifyContent: 'center', width: 150}}>{item.name}</Text>
-          <Text style={{fontWeight: 'bold', textAlign: 'center', width: 30}}>{item.totalPledge}</Text>
-          <Text style={{fontWeight: 'bold', textAlign: 'center', width: 30}}>{item.totalDrink}</Text>
+          <Text style={{textAlign: 'center', fontWeight: 'bold', width: 15, fontSize: 17}}>{index+1}</Text>
+          <Text style={{textAlign: 'center', fontWeight: 'bold', justifyContent: 'center', width: 150, fontSize: 17}}>{item.name}</Text>
+          <Text style={{fontWeight: 'bold', textAlign: 'center', width: 30, fontSize: 17}}>{item.totalPledge}</Text>
+          <Text style={{fontWeight: 'bold', textAlign: 'center', width: 30, fontSize: 17}}>{item.totalDrink}</Text>
       </View>
     );
 
@@ -143,15 +143,15 @@ class Game extends React.Component {
                   onRequestClose={() => {this._setModalVisible(false);}}
                 >
                   <TouchableOpacity 
-                    style={{marginTop: 50, flex: 1, alignItems: 'center'}}
+                    style={{flex: 1, alignItems: 'center'}}
                     activeOpacity={1} 
                     onPressOut={() => {this._setModalVisible(false)}}
                   >
-                    <View style={{ padding: 10, marginTop: 20, borderRadius: 4, borderWidth: 2, borderColor: '#fff', backgroundColor: 'rgba(90, 188, 187, 0.9)', width: 250 }}>
+                    <View style={{ padding: 10, marginTop: 60, borderRadius: 4, borderWidth: 2, borderColor: '#fff', backgroundColor: '#DAA520', width: 250 }}>
                       <View style={{flexDirection: 'row', paddingBottom: 5}}>
                         <Icon name="hashtag" size={20} color={'white'} />
                         <Icon name="users" size={20} color={'white'} style={{marginLeft: 70}} />
-                        <Icon name="bitcoin" size={20} color={'white'} style={{marginLeft: 60}} />
+                        <Icon name="star" size={20} color={'white'} style={{marginLeft: 60}} />
                         <Icon name="beer" size={20} color={'white'} style={{marginLeft: 15}} />
                       </View>
                       <FlatList
@@ -212,7 +212,6 @@ class Game extends React.Component {
                       
                   </View>
                 </View>
-
                 {/** JEU */}
                 <View style={styles.bottom_container}>
                     <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 30, color: 'white'}}>{this.state.players[this.state.currentPlayer].name} : {this.state.pledge.desc}</Text>

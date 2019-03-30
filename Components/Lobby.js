@@ -3,6 +3,7 @@ import { StyleSheet, TextInput, View, FlatList, Button, ImageBackground, Touchab
 import Player from './Player'
 import { connect } from 'react-redux'
 import SvgUri from 'react-native-svg-uri';
+import { avatarList } from '../helpers/pledgeHelper'
 
 class Lobby extends React.Component {
 
@@ -28,6 +29,7 @@ class Lobby extends React.Component {
       player = {
         id: this.id,
         name: this.name,
+        avatar: avatarList[this.id],
         totalPledge: 0,
         totalDrink: 0
       }

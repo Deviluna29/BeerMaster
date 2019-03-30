@@ -17,6 +17,17 @@ const QUESTIONS = "#29a7b6"
 const ACTIONS = "#d55122"
 const VERITES = "#38ba78"
 
+export const avatarList = [
+    require("../assets/images/avatar/user1.svg"),
+    require("../assets/images/avatar/user2.svg"),
+    require("../assets/images/avatar/user3.svg"),
+    require("../assets/images/avatar/user4.svg"),
+    require("../assets/images/avatar/user5.svg"),
+    require("../assets/images/avatar/user6.svg"),
+    require("../assets/images/avatar/user7.svg"),
+    require("../assets/images/avatar/user8.svg")
+]
+
 // Tèmes : Questions | Action | Vérité | Marques
 
 const pledgesQuestions = [

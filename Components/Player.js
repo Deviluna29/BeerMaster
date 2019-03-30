@@ -14,7 +14,11 @@ class Player extends React.Component {
     const player = this.props.player
     return (
       <View style={styles.mainContainer}>
-        <Text style={styles.text_number}>{player.id}</Text>
+          <SvgUri
+              height="35"
+              width="35"            
+              source={player.avatar}
+          />
         <Text style={styles.text_name}>{player.name}</Text>
         <TouchableOpacity onPress={() => {this._deletePlayer()}} style={styles.delete_Button}>            
           <SvgUri

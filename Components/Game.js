@@ -193,9 +193,9 @@ class Game extends React.Component {
                       <View style={{flexDirection: 'row'}}>
                           <SvgUri
                             height="50"
-                            width="50"            
-                            source={require('../assets/images/robot.svg')}
-                          />                      
+                            width="50"
+                            source={this.state.players[this.state.currentPlayer].avatar}
+                          />
                           <View style={{flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', marginLeft: 8}}>
                               <View style={{flexDirection: 'row'}}>
                                   <Image style={styles.score_image} source={require('../assets/images/medal.png')} />

@@ -14,6 +14,7 @@ class Game extends React.Component {
         this.typeGame = this.props.navigation.state.params.typeGame;
         this.state = {
             pledge: randomPledge(),
+            responseDisplayed: false,
             players: this.props.playerReducer.players,
             currentPlayer: 0,
             maxRound: this.props.parameterReducer.parameters.nbrTourMax,
@@ -50,7 +51,7 @@ class Game extends React.Component {
         }
         if(this.typeGame === true && newCurrentRound > this.state.maxRound) this._displayFinalScore()
         else if (this.typeGame === false && this.state.players[0].totalPledge >= this.state.maxScore)  this._displayFinalScore()
-        else this.setState({ pledge: randomPledge(), currentPlayer: newCurrentPlayer, currentRound: newCurrentRound})
+        else this.setState({ pledge: randomPledge(), currentPlayer: newCurrentPlayer, currentRound: newCurrentRound, responseDisplayed: false})
     }
 
     _pledgeButton(){
@@ -81,6 +82,53 @@ class Game extends React.Component {
       } else {
         return <Text style={{fontWeight: 'bold', fontSize: 18, marginLeft: 5}}>{this.state.currentRound}</Text>
       }
+    }
+
+    _renderBottomGame() {
+      if (this.state.pledge.name === "Question" && !this.state.responseDisplayed) {
+        return (
+          <TouchableOpacity onPress={() => this.setState({responseDisplayed: true})} style={styles.choice_Button}>
+              <View style={{justifyContent: 'center', alignItems: 'center', marginLeft: 10}}>
+                <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 20, color: 'white'}}>Afficher la réponse</Text>
+              </View>
+          </TouchableOpacity>
+        )
+      } else {
+        return (
+          <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width: '80%'}}>
+            <TouchableOpacity onPress={() => this._drinkButton()} style={styles.choice_Button}>                      
+                <SvgUri
+                  height="35"
+                  width="35"            
+                  source={require('../assets/images/cross.svg')}
+                />
+                <View style={{justifyContent: 'center', alignItems: 'center', marginLeft: 10}}>                          
+                  <Image style={styles.miniature_score_image} source={require('../assets/images/beer.png')} />
+                  <Text style={styles.bottom_text_cross}>+ {this.state.pledge.powerDrink}</Text>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this._pledgeButton()} style={styles.choice_Button}>
+                <SvgUri
+                  height="50"
+                  width="50"            
+                  source={require('../assets/images/validate.svg')}
+                />
+                <View style={{justifyContent: 'center', alignItems: 'center', marginLeft: 10}}>                          
+                  <Image style={styles.miniature_score_image} source={require('../assets/images/medal.png')} />
+                  <Text style={styles.bottom_text_validate}>+ {this.state.pledge.powerPledge}</Text>
+                </View>
+            </TouchableOpacity>
+          </View>
+        )
+      }      
+    }
+
+    _renderResponse() {
+      if (this.state.pledge.name === "Question" && this.state.responseDisplayed) {
+        return (
+          <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 30, color: 'yellow'}}>Réponse : {this.state.pledge.response}</Text>
+        )        
+      }      
     }
 
     render() {
@@ -167,34 +215,12 @@ class Game extends React.Component {
 
                 {/** JEU */}
                 <View style={styles.bottom_container}>
-                    <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 30, color: 'white'}}>{this.state.players[this.state.currentPlayer].name} : {this.state.pledge.desc}</Text>                 
+                    <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 30, color: 'white'}}>{this.state.players[this.state.currentPlayer].name} : {this.state.pledge.desc}</Text>
+                    {this._renderResponse()}               
                 </View>
 
-                {/** BOUTONS */}
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width: '80%'}}>
-                    <TouchableOpacity onPress={() => this._drinkButton()} style={styles.choice_Button}>                      
-                        <SvgUri
-                          height="35"
-                          width="35"            
-                          source={require('../assets/images/cross.svg')}
-                        />
-                        <View style={{justifyContent: 'center', alignItems: 'center', marginLeft: 10}}>                          
-                          <Image style={styles.miniature_score_image} source={require('../assets/images/beer.png')} />
-                          <Text style={styles.bottom_text_cross}>+ {this.state.pledge.powerDrink}</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => this._pledgeButton()} style={styles.choice_Button}>
-                        <SvgUri
-                          height="50"
-                          width="50"            
-                          source={require('../assets/images/validate.svg')}
-                        />
-                        <View style={{justifyContent: 'center', alignItems: 'center', marginLeft: 10}}>                          
-                          <Image style={styles.miniature_score_image} source={require('../assets/images/medal.png')} />
-                          <Text style={styles.bottom_text_validate}>+ {this.state.pledge.powerPledge}</Text>
-                        </View>
-                    </TouchableOpacity>
-                </View>
+                {/** BOTTOM */}
+                {this._renderBottomGame()}
               </View>
             </ImageBackground>
         )

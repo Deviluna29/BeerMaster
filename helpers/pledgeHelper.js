@@ -20,10 +20,10 @@ const VERITES = "#06D6A0"
 // Tèmes : Questions | Action | Vérité | Marques
 
 const pledgesQuestions = [
-    {id:0,name:"Question",desc:"Quelle est la vitesse de la lumière ?",powerPledge: 1, powerDrink: 1, theme: QUESTIONS},
-    {id:1,name:"Question",desc:"Cites les 2 couleurs du drapeau Canadien",powerPledge: 1, powerDrink: 1, theme: QUESTIONS},
-    {id:2,name:"Question",desc:"Combien d'étoiles y a t'il sur le drapeau Américain ?",powerPledge: 1, powerDrink: 1, theme: QUESTIONS},
-    {id:3,name:"Question",desc:"Combien font 3 + 2 x 0",powerPledge: 1, powerDrink: 1, theme: QUESTIONS}
+    {id:0,name:"Question",desc:"Quelle est la vitesse de la lumière ?",powerPledge: 1, powerDrink: 1, theme: QUESTIONS, response: "300 000 km/s"},
+    {id:1,name:"Question",desc:"Cites les 2 couleurs du drapeau Canadien",powerPledge: 1, powerDrink: 1, theme: QUESTIONS, response: "Rouge et Blanc"},
+    {id:2,name:"Question",desc:"Combien d'étoiles y a t'il sur le drapeau Américain ?",powerPledge: 1, powerDrink: 1, theme: QUESTIONS, response: "50"},
+    {id:3,name:"Question",desc:"Combien font 3 + 2 x 0",powerPledge: 1, powerDrink: 1, theme: QUESTIONS, response: "3"}
 ]
 
 const pledgesActions = [

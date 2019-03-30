@@ -1,7 +1,7 @@
 const initialState = {
   players: [
-    {id: 1, name: "McBernik", avatar: require("../../assets/images/avatar/user1.svg"), totalPledge: 0, totalDrink: 0},
-    {id: 2, name: "RonRon", avatar: require("../../assets/images/avatar/user2.svg"), totalPledge: 0, totalDrink: 0}
+    /*{id: 1, name: "McBernik", avatar: require("../../assets/images/avatar/user1.png"), totalPledge: 0, totalDrink: 0},
+    {id: 2, name: "RonRon", avatar: require("../../assets/images/avatar/user2.png"), totalPledge: 0, totalDrink: 0}*/
   ]
 }
 

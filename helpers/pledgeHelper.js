@@ -22,14 +22,14 @@ const iconAction = require('../assets/images/action.svg')
 const iconVerite = require('../assets/images/verite.svg')
 
 export const avatarList = [
-    require("../assets/images/avatar/user1.svg"),
-    require("../assets/images/avatar/user2.svg"),
-    require("../assets/images/avatar/user3.svg"),
-    require("../assets/images/avatar/user4.svg"),
-    require("../assets/images/avatar/user5.svg"),
-    require("../assets/images/avatar/user6.svg"),
-    require("../assets/images/avatar/user7.svg"),
-    require("../assets/images/avatar/user8.svg")
+    require("../assets/images/avatar/user1.png"),
+    require("../assets/images/avatar/user2.png"),
+    require("../assets/images/avatar/user3.png"),
+    require("../assets/images/avatar/user4.png"),
+    require("../assets/images/avatar/user5.png"),
+    require("../assets/images/avatar/user6.png"),
+    require("../assets/images/avatar/user7.png"),
+    require("../assets/images/avatar/user8.png")
 ]
 
 // Tèmes : Questions | Action | Vérité | Marques

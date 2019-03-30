@@ -145,7 +145,7 @@ class Game extends React.Component {
                     activeOpacity={1} 
                     onPressOut={() => {this._setModalVisible(false)}}
                   >
-                    <View style={{ padding: 10, marginTop: 60, borderRadius: 4, borderWidth: 2, borderColor: '#fff', backgroundColor: '#DAA520', width: 250 }}>
+                    <View style={{ padding: 10, marginTop: 60, borderRadius: 4, borderWidth: 2, borderColor: '#fff', backgroundColor: this.state.pledge.theme, width: 250 }}>
                       <View style={{flexDirection: 'row', paddingBottom: 5}}>
                         <Icon name="hashtag" size={20} color={'white'} />
                         <Icon name="users" size={20} color={'white'} style={{marginLeft: 70}} />
@@ -171,7 +171,7 @@ class Game extends React.Component {
                               <SvgUri
                                 height="25"
                                 width="25"            
-                                source={require('../assets/images/question.svg')}
+                                source={this.state.pledge.icon}
                               />
                           </View>                        
                     </View>

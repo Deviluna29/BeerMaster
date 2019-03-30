@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { StyleSheet, View, ImageBackground, TouchableOpacity, Text } from 'react-native'
+import { StyleSheet, View, Image, ImageBackground, TouchableOpacity, Text } from 'react-native'
 import SvgUri from 'react-native-svg-uri';
 
 export default class Home extends React.Component {
@@ -30,12 +30,24 @@ _displayParameters() {
               </View> 
                 <TouchableOpacity style={styles.button} onPress={() => {this._displayLobby()}}>
                   <Text style={styles.button_text}>Jouer</Text>
+                  <Image
+                    style={styles.icone}
+                    source={require('../assets/images/beerGame.png')}
+                  />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={() => {this._displayScores()}}>
                   <Text style={styles.button_text}>Scores</Text>
+                  <Image
+                    style={styles.icone}
+                    source={require('../assets/images/trophy.png')}
+                  />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={() => {this._displayParameters()}}>
                   <Text style={styles.button_text}>Paramètres</Text>
+                  <Image
+                    style={styles.icone}
+                    source={require('../assets/images/gear.png')}
+                  />
                 </TouchableOpacity>
             </View>
           </ImageBackground>
@@ -54,17 +66,24 @@ const styles = StyleSheet.create({
       marginBottom: 20,
     },
     button: {
+      flexDirection: 'row',
       margin: 5,
       justifyContent: 'center',
-      borderColor: 'rgba(255, 255, 255, 0.5)',
-      borderWidth: 2,
-      borderRadius: 10,
+      //borderColor: 'rgba(255, 255, 255, 0.5)',
+      //borderWidth: 2,
+      //borderRadius: 10,
+      justifyContent: 'center',
+      alignItems: 'center'
     },
     button_text: {
       color: 'black',
       fontSize: 20,
       fontWeight: 'bold',
-      fontWeight: 'bold',
       margin: 5
+    },
+    icone: {
+      width: 30,
+      height: 30,
+      marginRight: 5      
     }
   });

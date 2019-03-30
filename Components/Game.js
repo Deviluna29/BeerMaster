@@ -191,11 +191,7 @@ class Game extends React.Component {
                   <View style={{flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', width: '90%'}}>
                       <Text style={styles.player_name}>{this.state.players[this.state.currentPlayer].name}</Text>
                       <View style={{flexDirection: 'row'}}>
-                          <SvgUri
-                            height="50"
-                            width="50"
-                            source={this.state.players[this.state.currentPlayer].avatar}
-                          />
+                          <Image style={{width: 50, height: 50}} source={this.state.players[this.state.currentPlayer].avatar} />
                           <View style={{flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', marginLeft: 8}}>
                               <View style={{flexDirection: 'row'}}>
                                   <Image style={styles.score_image} source={require('../assets/images/medal.png')} />

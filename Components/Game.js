@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { StyleSheet, View, Text, Image, TouchableOpacity, Modal, FlatList, ImageBackground } from 'react-native'
+import { StyleSheet, View, Text, Image, TouchableOpacity, Modal, FlatList, ImageBackground, BackHandler, Alert } from 'react-native'
 import { randomPledge } from '../helpers/pledgeHelper'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -22,6 +22,27 @@ class Game extends React.Component {
             currentRound: 1,
             modalVisible: false
          }
+    }
+
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    }
+    
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
+    }
+    
+    handleBackPress = () => {   
+      Alert.alert(
+        'Fin de partie',
+        'Voulez-vous vraiment quitter la partie ?',
+        [
+          {text: 'Oui', onPress: () => this._displayFinalScore()},
+          {text: 'Non', onPress: () => console.log('Cancel Pressed')}
+        ],
+        {cancelable: false},
+      );   
+      return true;
     }
 
     _renderItemScore = ({item, index}) => (

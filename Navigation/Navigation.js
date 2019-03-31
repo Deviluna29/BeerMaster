@@ -4,6 +4,7 @@ import Lobby from '../Components/Lobby'
 import Game from '../Components/Game'
 import Score from '../Components/Score'
 import Parameters from '../Components/Parameters';
+import Rules from '../Components/Rules'
 
 const SearchStackNavigator = createStackNavigator({
   Home: {
@@ -32,6 +33,12 @@ const SearchStackNavigator = createStackNavigator({
   },
   Parameters: {
     screen: Parameters,
+    navigationOptions: {
+      header: null
+    }
+  },
+  Rules: {
+    screen: Rules,
     navigationOptions: {
       header: null
     }

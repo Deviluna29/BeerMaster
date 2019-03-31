@@ -2,7 +2,6 @@ import React from 'react'
 import { StyleSheet, TextInput, View, FlatList, Button, ImageBackground, TouchableOpacity, Image, Text } from 'react-native'
 import Player from './Player'
 import { connect } from 'react-redux'
-import SvgUri from 'react-native-svg-uri';
 import { randomAvatar } from '../helpers/pledgeHelper'
 
 class Lobby extends React.Component {
@@ -46,10 +45,10 @@ class Lobby extends React.Component {
     this.props.dispatch(action)
   }
 
-  _displayTheGame() {
+  _displayTheRules() {
     const action = { type: "EMPTY_SCORE"}
     this.props.dispatch(action)
-    this.props.navigation.navigate("Game", { typeGame: this.state.typeGame })
+    this.props.navigation.navigate("Rules", { typeGame: this.state.typeGame })
   }
 
   _switchGameType() {
@@ -60,19 +59,17 @@ class Lobby extends React.Component {
     if (this.state.typeGame === true) {
       return  <TouchableOpacity onPress={() => this. _switchGameType()} style={styles.start_Button}>
                 <Text style={styles.bottom_text}>PAR TOUR</Text>
-                <SvgUri
-                  height="20"
-                  width="20"            
-                  source={require('../assets/images/reload.svg')}
+                <Image
+                    style={{height: 20, width: 20}}
+                    source={require('../assets/images/round.png')}
                 />
               </TouchableOpacity>
     } else {
       return  <TouchableOpacity onPress={() => this. _switchGameType()} style={styles.start_Button}>
                 <Text style={styles.bottom_text}>PAR SCORE</Text>
-                <SvgUri
-                  height="20"
-                  width="20"            
-                  source={require('../assets/images/score.svg')}
+                <Image
+                  style={{height: 20, width: 20}}
+                  source={require('../assets/images/score.png')}
                 />
               </TouchableOpacity>
     }
@@ -99,11 +96,10 @@ class Lobby extends React.Component {
               onSubmitEditing={() => {this._addPlayer()}}
               maxLength={14}
             />
-            <TouchableOpacity onPress={() => this._addPlayer()} style={styles.add_Button}>                
-              <SvgUri
-                height="30"
-                width="30"            
-                source={require('../assets/images/add.svg')}
+            <TouchableOpacity onPress={() => this._addPlayer()} style={styles.add_Button}>
+              <Image
+                style={{height: 30, width: 30}}
+                source={require('../assets/images/add.png')}
               />
             </TouchableOpacity>
           </View>
@@ -116,18 +112,16 @@ class Lobby extends React.Component {
           <View style={styles.bottom_container}>
             <TouchableOpacity onPress={() => this._deleteAllPlayers()} style={styles.start_Button}>
               <Text style={styles.bottom_text}>RESET</Text>
-              <SvgUri
-                height="15"
-                width="15"            
-                source={require('../assets/images/reset.svg')}
+              <Image
+                  style={{height: 15, width: 15}}
+                  source={require('../assets/images/reset.png')}
               />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this._displayTheGame()} style={styles.start_Button}>
+            <TouchableOpacity onPress={() => this._displayTheRules()} style={styles.start_Button}>
               <Text style={styles.bottom_text}>JOUER</Text>
-              <SvgUri
-                height="15"
-                width="15"            
-                source={require('../assets/images/play-button.svg')}
+              <Image
+                  style={{height: 15, width: 15}}
+                  source={require('../assets/images/play-button.png')}
               />
             </TouchableOpacity>
               { this._renderTypeGame() }

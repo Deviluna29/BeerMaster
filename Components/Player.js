@@ -1,7 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native'
 import { connect } from 'react-redux'
-import SvgUri from 'react-native-svg-uri';
 
 class Player extends React.Component {
 
@@ -16,11 +15,10 @@ class Player extends React.Component {
       <View style={styles.mainContainer}>
         <Image style={{width: 35, height: 35}} source={player.avatar} />
         <Text style={styles.text_name}>{player.name}</Text>
-        <TouchableOpacity onPress={() => {this._deletePlayer()}} style={styles.delete_Button}>            
-          <SvgUri
-              height="20"
-              width="20"            
-              source={require('../assets/images/delete.svg')}
+        <TouchableOpacity onPress={() => {this._deletePlayer()}} style={styles.delete_Button}>
+          <Image
+            style={{height: 20, width: 20}}
+            source={require('../assets/images/delete.png')}
           />
         </TouchableOpacity>
       </View>

@@ -95,22 +95,20 @@ class Game extends React.Component {
         return (
           <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width: '80%'}}>
             <TouchableOpacity onPress={() => this._drinkButton()} style={styles.choice_Button}>                      
-                <SvgUri
-                  height="35"
-                  width="35"            
-                  source={require('../assets/images/cross.svg')}
-                />
+                <Image 
+                  style={{height: 50, width: 50}} 
+                  source={require('../assets/images/cross.png')}
+                /> 
                 <View style={{justifyContent: 'center', alignItems: 'center', marginLeft: 10}}>                          
                   <Image style={styles.miniature_score_image} source={require('../assets/images/beer.png')} />
                   <Text style={styles.bottom_text_cross}>+ {this.state.pledge.powerDrink}</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this._pledgeButton()} style={styles.choice_Button}>
-                <SvgUri
-                  height="50"
-                  width="50"            
-                  source={require('../assets/images/validate.svg')}
-                />
+                <Image 
+                  style={{height: 50, width: 50}} 
+                  source={require('../assets/images/validate.png')}
+                />                
                 <View style={{justifyContent: 'center', alignItems: 'center', marginLeft: 10}}>                          
                   <Image style={styles.miniature_score_image} source={require('../assets/images/medal.png')} />
                   <Text style={styles.bottom_text_validate}>+ {this.state.pledge.powerPledge}</Text>
@@ -176,10 +174,9 @@ class Game extends React.Component {
                           </View>                        
                     </View>
                     <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                          <SvgUri
-                            height="25"
-                            width="25"            
-                            source={require('../assets/images/reload.svg')}
+                          <Image
+                            style={{height: 25, width: 25}}
+                            source={require('../assets/images/round.png')}
                           />
                           { this._renderRound() } 
                     </View>        

@@ -46,7 +46,7 @@ class Lobby extends React.Component {
   }
 
   _displayTheRules() {
-    
+
     if(this.props.playerReducer.players.length > 0){
       const action = { type: "EMPTY_SCORE"}
       this.props.dispatch(action)
@@ -60,21 +60,21 @@ class Lobby extends React.Component {
 
   _renderTypeGame() {
     if (this.state.typeGame === true) {
-      return  <TouchableOpacity onPress={() => this. _switchGameType()} style={styles.start_Button}>
+      return  (<TouchableOpacity onPress={() => this._switchGameType()} style={styles.start_Button}>
                 <Text style={styles.bottom_text}>PAR TOUR</Text>
                 <Image
                     style={{height: 20, width: 20}}
                     source={require('../assets/images/round.png')}
                 />
-              </TouchableOpacity>
+              </TouchableOpacity>)
     } else {
-      return  <TouchableOpacity onPress={() => this. _switchGameType()} style={styles.start_Button}>
+      return  (<TouchableOpacity onPress={() => this._switchGameType()} style={styles.start_Button}>
                 <Text style={styles.bottom_text}>PAR SCORE</Text>
                 <Image
                   style={{height: 20, width: 20}}
                   source={require('../assets/images/score.png')}
                 />
-              </TouchableOpacity>
+              </TouchableOpacity>)
     }
   }
 

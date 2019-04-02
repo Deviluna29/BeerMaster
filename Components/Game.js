@@ -5,7 +5,6 @@ import { randomPledge } from '../helpers/pledgeHelper'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { compareValues } from '../helpers/functionsHelper'
-import SvgUri from 'react-native-svg-uri';
 
 class Game extends React.Component {
 
@@ -167,9 +166,9 @@ class Game extends React.Component {
                     <View style={{ padding: 10, marginTop: 60, borderRadius: 4, borderWidth: 2, borderColor: '#fff', backgroundColor: this.state.pledge.theme, width: 250 }}>
                       <View style={{flexDirection: 'row', paddingBottom: 5}}>
                         <Icon name="hashtag" size={20} color={'white'} />
-                        <Icon name="users" size={20} color={'white'} style={{marginLeft: 70}} />
-                        <Icon name="star" size={20} color={'white'} style={{marginLeft: 60}} />
-                        <Icon name="beer" size={20} color={'white'} style={{marginLeft: 15}} />
+                        <Icon name="users" size={20} color={'white'} style={{marginLeft: 60}} />
+                        <Icon name="star" size={20} color={'white'} style={{marginLeft: 68}} />
+                        <Icon name="beer" size={20} color={'white'} style={{marginLeft: 12}} />
                       </View>
                       <FlatList
                         data={this.state.players}
@@ -187,9 +186,8 @@ class Game extends React.Component {
                     <View style={{flex: 1, flexDirection: 'row'}}>
                           <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', borderRightWidth: 2, padding: 3, borderColor: this.state.pledge.theme}}>
                               <Text style={{marginRight: 5, fontWeight: 'bold', fontSize: 18, color: this.state.pledge.theme}}>{this.state.pledge.name}</Text>
-                              <SvgUri
-                                height="25"
-                                width="25"            
+                              <Image
+                                style={{height: 25, width: 25}}
                                 source={this.state.pledge.icon}
                               />
                           </View>                        

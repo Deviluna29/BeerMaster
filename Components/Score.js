@@ -58,13 +58,13 @@ class Score extends React.Component {
                     </TouchableOpacity>
                   </View>
                     <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 30, width: 200}}>{this.state.players[0].name}</Text>
-                    <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 30, width: 200}}>a gagné !!!!!!!</Text>
+                    <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 30, width: 200}}>a gagné !</Text>
                     <View style={{ padding: 10, marginTop: 20, borderRadius: 4, borderWidth: 2, borderColor: '#fff', backgroundColor: 'rgba(255, 255, 255, 0.5)', width: 250 }}>
                         <View style={{flexDirection: 'row', paddingBottom: 5}}>
                             <Icon name="hashtag" size={20} color={'white'} />
-                            <Icon name="users" size={20} color={'white'} style={{marginLeft: 70}} />
-                            <Icon name="star" size={20} color={'white'} style={{marginLeft: 60}} />
-                            <Icon name="beer" size={20} color={'white'} style={{marginLeft: 15}} />
+                            <Icon name="users" size={20} color={'white'} style={{marginLeft: 60}} />
+                            <Icon name="star" size={20} color={'white'} style={{marginLeft: 68}} />
+                            <Icon name="beer" size={20} color={'white'} style={{marginLeft: 12}} />
                         </View>
                         <FlatList
                             data={this.state.players}

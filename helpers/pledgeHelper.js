@@ -22,9 +22,9 @@ const colorQuestion = "#29a7b6"
 const colorAction = "#d55122"
 const colorVerite = "#38ba78"
 
-const iconQuestion = require('../assets/images/question.svg')
-const iconAction = require('../assets/images/action.svg')
-const iconVerite = require('../assets/images/verite.svg')
+const iconQuestion = require('../assets/images/question.png')
+const iconAction = require('../assets/images/action.png')
+const iconVerite = require('../assets/images/verite.png')
 
 const avatarList = [
     require("../assets/images/avatar/user1.png"),
@@ -83,8 +83,8 @@ const pledgesQuestions = [
     {id:12,name:"Question",desc:"Quel est la 1ère émission de télé réalité a avoir été diffuser en France ?",powerPledge: 1, powerDrink: 1, theme: colorQuestion, icon: iconQuestion, response: "Loft story"},
     {id:13,name:"Question",desc:"Quel est le symbole chimique de l’azote ?",powerPledge: 1, powerDrink: 1, theme: colorQuestion, icon: iconQuestion, response: "N"},
     {id:14,name:"Question",desc:"Qui chante « baby one more time » ?",powerPledge: 1, powerDrink: 1, theme: colorQuestion, icon: iconQuestion, response: "Britney Spears"},
-    {id:15,name:"Question",desc:"Quel est le prénom de ton voisin de gauche ?",powerPledge: 1, powerDrink: 1, theme: colorQuestion, icon: iconQuestion, response: "Désolé je peux pas t'aider"},
-    {id:16,name:"Question",desc:"Qui est Usain Bolt ?",powerPledge: 1, powerDrink: 1, theme: colorQuestion, icon: iconQuestion, response: "Un athlète jamaïcain"}
+    {id:15,name:"Question",desc:"Quel est le prénom de ton voisin de gauche ?",powerPledge: 1, powerDrink: 1, theme: colorQuestion, icon: iconQuestion, response: "Désolé, je ne peux pas t'aider"},
+    {id:16,name:"Question",desc:"Qui est Usain Bolt ?",powerPledge: 1, powerDrink: 1, theme: colorQuestion, icon: iconQuestion, response: "Un athlète Jamaïcain"}
 ]
 
 const pledgesActions = [

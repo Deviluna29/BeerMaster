@@ -3,8 +3,8 @@ import React from 'react'
 import { StyleSheet, View, Text, Image, TouchableOpacity, Modal, FlatList, ImageBackground, BackHandler, Alert } from 'react-native'
 import { randomPledge } from '../helpers/pledgeHelper'
 import { connect } from 'react-redux'
-import Icon from 'react-native-vector-icons/FontAwesome'
 import { compareValues } from '../helpers/functionsHelper'
+import ScoreBoard from './ScoreBoard';
 
 class Game extends React.Component {
 
@@ -43,15 +43,6 @@ class Game extends React.Component {
       );   
       return true;
     }
-
-    _renderItemScore = ({item, index}) => (
-      <View style={{ flexDirection: 'row',  paddingBottom: 5, borderTopWidth: 1, borderTopColor: '#fff'}}>
-          <Text style={{textAlign: 'center', fontWeight: 'bold', width: 15, fontSize: 17}}>{index+1}</Text>
-          <Text style={{textAlign: 'center', fontWeight: 'bold', justifyContent: 'center', width: 150, fontSize: 17}}>{item.name}</Text>
-          <Text style={{fontWeight: 'bold', textAlign: 'center', width: 30, fontSize: 17}}>{item.totalPledge}</Text>
-          <Text style={{fontWeight: 'bold', textAlign: 'center', width: 30, fontSize: 17}}>{item.totalDrink}</Text>
-      </View>
-    );
 
     _setModalVisible(visible) {
         this.state.players.sort(compareValues('totalPledge', 'desc'))
@@ -159,23 +150,11 @@ class Game extends React.Component {
                   onRequestClose={() => {this._setModalVisible(false);}}
                 >
                   <TouchableOpacity 
-                    style={{flex: 1, alignItems: 'center'}}
-                    activeOpacity={1} 
-                    onPressOut={() => {this._setModalVisible(false)}}
-                  >
-                    <View style={{ padding: 10, marginTop: 60, borderRadius: 4, borderWidth: 2, borderColor: '#fff', backgroundColor: this.state.pledge.theme, width: 250 }}>
-                      <View style={{flexDirection: 'row', paddingBottom: 5}}>
-                        <Icon name="hashtag" size={20} color={'white'} />
-                        <Icon name="users" size={20} color={'white'} style={{marginLeft: 60}} />
-                        <Icon name="star" size={20} color={'white'} style={{marginLeft: 68}} />
-                        <Icon name="beer" size={20} color={'white'} style={{marginLeft: 12}} />
-                      </View>
-                      <FlatList
-                        data={this.state.players}
-                        keyExtractor={(item) => item.id.toString()}
-                        renderItem={this._renderItemScore}
-                      />
-                    </View>
+                      style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}
+                      activeOpacity={1} 
+                      onPressOut={() => {this._setModalVisible(false)}}
+                  >                    
+                    <ScoreBoard></ScoreBoard>
                   </TouchableOpacity>
                 </Modal>
 
@@ -210,11 +189,11 @@ class Game extends React.Component {
                           <Image style={{width: 50, height: 50}} source={this.state.players[this.state.currentPlayer].avatar} />
                           <View style={{flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', marginLeft: 8}}>
                               <View style={{flexDirection: 'row'}}>
-                                  <Image style={styles.score_image} source={require('../assets/images/medal.png')} />
+                                  <Image style={styles.score_image} source={require('../assets/images/medal.png')}/>
                                   { this._renderScore() }                      
                               </View>                        
                               <View style={{flexDirection: 'row'}}>
-                                  <Image style={styles.score_image} source={require('../assets/images/beer.png')} />
+                                  <Image style={styles.score_image} source={require('../assets/images/beer.png')}/>
                                   <Text style={styles.score_drink}>{this.state.players[this.state.currentPlayer].totalDrink}</Text>
                               </View>                    
                           </View>

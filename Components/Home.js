@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
     },
     icone: {
       width: 30,
-      height: 30,
-      marginRight: 5      
+      height: 30   
     }
   });

@@ -5,11 +5,11 @@ export function randomTheme(){
     if (num == 0) {
         return questionTheme;
     } else if (num == 1) {
-        return questionTheme;
+        return actionTheme;
     } else if (num == 2) {
-        return questionTheme;
+        return action2Theme;
     } else if (num == 3) {
-        return questionTheme;
+        return veriteTheme;
     } else {
         return []
     }

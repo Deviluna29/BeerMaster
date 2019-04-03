@@ -1,7 +1,7 @@
 
 import React from 'react'
-import { StyleSheet, View, Text, Image, TouchableOpacity, Modal, FlatList, ImageBackground, BackHandler, Alert } from 'react-native'
-import { randomPledge } from '../helpers/pledgeHelper'
+import { StyleSheet, View, Text, Image, TouchableOpacity, Modal, BackHandler, Alert } from 'react-native'
+import { randomTheme, randomPledge } from '../helpers/pledgeHelper'
 import { connect } from 'react-redux'
 import { compareValues } from '../helpers/functionsHelper'
 import ScoreBoard from './ScoreBoard';
@@ -11,8 +11,9 @@ class Game extends React.Component {
     constructor(props) {
         super(props)
         this.typeGame = this.props.navigation.state.params.typeGame;
+        this.theme = randomTheme();
+        this.pledge = randomPledge(this.theme);
         this.state = {
-            pledge: randomPledge(),
             responseDisplayed: false,
             players: this.props.playerReducer.players,
             currentPlayer: 0,
@@ -45,7 +46,7 @@ class Game extends React.Component {
     }
 
     _setModalVisible(visible) {
-        this.state.players.sort(compareValues('totalPledge', 'desc'))
+        this.state.players.sort(compareValues('totalPoint', 'desc'))
         this.setState({modalVisible: visible});
       }
     
@@ -60,20 +61,26 @@ class Game extends React.Component {
             newCurrentRound++;
             newCurrentPlayer = 0;
         }
-        if(this.typeGame === true && newCurrentRound > this.state.maxRound) this._displayFinalScore()
-        else if (this.typeGame === false && this.state.players[0].totalPledge >= this.state.maxScore)  this._displayFinalScore()
-        else this.setState({ pledge: randomPledge(), currentPlayer: newCurrentPlayer, currentRound: newCurrentRound, responseDisplayed: false})
+        if (this.typeGame === true && newCurrentRound > this.state.maxRound) {
+          this._displayFinalScore()
+        } else if (this.typeGame === false && this.state.players[0].totalPoint >= this.state.maxScore) {
+          this._displayFinalScore()
+        } else {
+          this.setState({ currentPlayer: newCurrentPlayer, currentRound: newCurrentRound, responseDisplayed: false});
+          this.theme = randomTheme();
+          this.pledge = randomPledge(this.theme);
+        } 
     }
 
     _pledgeButton(){
-        this.state.players[this.state.currentPlayer].totalPledge += this.state.pledge.powerPledge
+        this.state.players[this.state.currentPlayer].totalPoint += this.pledge.point
         const action = { type: "SET_SCORE_PLAYER", value: [this.state.currentPlayer, this.state.players[this.state.currentPlayer]] }
         this.props.dispatch(action)
         this._loadNewPledge()
     }
 
     _drinkButton(){
-        this.state.players[this.state.currentPlayer].totalDrink += this.state.pledge.powerDrink
+        this.state.players[this.state.currentPlayer].totalDrink += this.pledge.drink
         const action = { type: "SET_SCORE_PLAYER", value: [this.state.currentPlayer, this.state.players[this.state.currentPlayer]] }
         this.props.dispatch(action)
         this._loadNewPledge()
@@ -81,22 +88,22 @@ class Game extends React.Component {
 
     _renderScore() {
       if (this.typeGame === false) {
-        return <Text style={styles.score_point}>{this.state.players[this.state.currentPlayer].totalPledge} /{this.state.maxScore}</Text>
+        return <Text style={styles.score_point}>{this.state.players[this.state.currentPlayer].totalPoint} /{this.state.maxScore}</Text>
       } else {
-        return <Text style={styles.score_point}>{this.state.players[this.state.currentPlayer].totalPledge}</Text>
+        return <Text style={styles.score_point}>{this.state.players[this.state.currentPlayer].totalPoint}</Text>
       }
     }
 
     _renderRound() {
       if (this.typeGame === true) {
-        return <Text style={{fontWeight: 'bold', fontSize: 18, marginLeft: 5, color: this.state.pledge.theme}}>{this.state.currentRound} /{this.state.maxRound}</Text>
+        return <Text style={{fontWeight: 'bold', fontSize: 18, marginLeft: 5, color: this.theme.color}}>{this.state.currentRound} /{this.state.maxRound}</Text>
       } else {
-        return <Text style={{fontWeight: 'bold', fontSize: 18, marginLeft: 5, color: this.state.pledge.theme}}>{this.state.currentRound}</Text>
+        return <Text style={{fontWeight: 'bold', fontSize: 18, marginLeft: 5, color: this.theme.color}}>{this.state.currentRound}</Text>
       }
     }
 
     _renderBottomGame() {
-      if (this.state.pledge.name === "Question" && !this.state.responseDisplayed) {
+      if (this.theme.name === "Question" && !this.state.responseDisplayed) {
         return (
           <TouchableOpacity onPress={() => this.setState({responseDisplayed: true})} style={styles.response_Button}>
                 <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 20, color: 'white'}}>Afficher la réponse</Text>
@@ -112,7 +119,7 @@ class Game extends React.Component {
                 /> 
                 <View style={{justifyContent: 'center', alignItems: 'center', marginLeft: 10}}>                          
                   <Image style={styles.miniature_score_image} source={require('../assets/images/beer.png')} />
-                  <Text style={styles.bottom_text_cross}>+ {this.state.pledge.powerDrink}</Text>
+                  <Text style={styles.bottom_text_cross}>+ {this.pledge.drink}</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this._pledgeButton()} style={styles.choice_Button}>
@@ -122,7 +129,7 @@ class Game extends React.Component {
                 />                
                 <View style={{justifyContent: 'center', alignItems: 'center', marginLeft: 10}}>                          
                   <Image style={styles.miniature_score_image} source={require('../assets/images/medal.png')} />
-                  <Text style={styles.bottom_text_validate}>+ {this.state.pledge.powerPledge}</Text>
+                  <Text style={styles.bottom_text_validate}>+ {this.pledge.point}</Text>
                 </View>
             </TouchableOpacity>
           </View>
@@ -131,15 +138,15 @@ class Game extends React.Component {
     }
 
     _renderPledge() {
-      if (this.state.pledge.name === "Action2") {
-        var SampleText = this.state.pledge.desc;
+      if (this.theme.name === "Action2") {
+        var SampleText = this.pledge.desc;
         var NewText = SampleText.replace("'name'", this.state.players[this._randomPlayer()].name);
         return (
-          <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 30, color: this.state.pledge.theme}}>{this.state.players[this.state.currentPlayer].name} : {NewText}</Text>
+          <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 30, color: this.theme.color}}>{this.state.players[this.state.currentPlayer].name} : {NewText}</Text>
         )
       } else {
         return (
-          <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 30, color: this.state.pledge.theme}}>{this.state.players[this.state.currentPlayer].name} : {this.state.pledge.desc}</Text>
+          <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 30, color: this.theme.color}}>{this.state.players[this.state.currentPlayer].name} : {this.pledge.desc}</Text>
         )
       }                
     }
@@ -155,16 +162,16 @@ class Game extends React.Component {
     }
 
     _renderResponse() {
-      if (this.state.pledge.name === "Question" && this.state.responseDisplayed) {
+      if (this.theme.name === "Question" && this.state.responseDisplayed) {
         return (
-          <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 30, color: 'yellow'}}>Réponse : {this.state.pledge.response}</Text>
+          <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 30, color: 'yellow'}}>Réponse : {this.pledge.response}</Text>
         )        
       }      
     }
 
     render() {
         return (
-          <View style={{width: '100%', height: '100%', backgroundColor: this.state.pledge.theme}}>
+          <View style={{width: '100%', height: '100%', backgroundColor: this.theme.color}}>
               <View style={styles.main_container}>
                 {/** POP UP SCORE */}
                 <Modal
@@ -187,11 +194,11 @@ class Game extends React.Component {
                   {/** ENTÊTE */}
                   <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '90%', backgroundColor: 'rgba(0, 0, 0, 0.7)', padding: 5, borderRadius: 8}}>
                     <View style={{flex: 1, flexDirection: 'row'}}>
-                          <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', borderRightWidth: 2, padding: 3, borderColor: this.state.pledge.theme}}>
-                              <Text style={{marginRight: 5, fontWeight: 'bold', fontSize: 18, color: this.state.pledge.theme}}>{this.state.pledge.name}</Text>
+                          <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', borderRightWidth: 2, padding: 3, borderColor: this.theme.color}}>
+                              <Text style={{marginRight: 5, fontWeight: 'bold', fontSize: 18, color: this.theme.color}}>{this.theme.name}</Text>
                               <Image
                                 style={{height: 25, width: 25}}
-                                source={this.state.pledge.icon}
+                                source={this.theme.icon}
                               />
                           </View>                        
                     </View>

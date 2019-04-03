@@ -1,7 +1,7 @@
 const initialState = {
   players: [
-    {id: 1, name: "McBernik", avatar: require("../../assets/images/avatar/user1.png"), totalPledge: 0, totalDrink: 0},
-    {id: 2, name: "RonRon", avatar: require("../../assets/images/avatar/user2.png"), totalPledge: 0, totalDrink: 0}
+    {id: 1, name: "McBernik", avatar: require("../../assets/images/avatar/user1.png"), totalPoint: 0, totalDrink: 0},
+    {id: 2, name: "RonRon", avatar: require("../../assets/images/avatar/user2.png"), totalPont: 0, totalDrink: 0}
   ]
 }
 
@@ -42,7 +42,7 @@ export default function setPlayer (state = initialState, action) {
     nextState = { ...state }
     for (i =0 ; i < nextState.players.length; i++) {
       nextState.players[i].totalDrink = 0;
-      nextState.players[i].totalPledge = 0;
+      nextState.players[i].totalPoint = 0;
     }    
     return nextState || state
   }

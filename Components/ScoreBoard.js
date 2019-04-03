@@ -11,14 +11,14 @@ class ScoreBoard extends React.Component {
         this.state = {
             players: cloneDeep(this.props.playerReducer.players)
         }
-        this.state.players.sort(compareValues('totalPledge', 'desc'))
+        this.state.players.sort(compareValues('totalPoint', 'desc'))
     }
 
     _renderItem = ({item, index}) => (
         <View style={{ flexDirection: 'row',  paddingBottom: 5, borderTopWidth: 1, borderTopColor: 'grey'}}>
             <Text style={{textAlign: 'center', fontWeight: 'bold', width: 15, fontSize: 18, color: 'white', backgroundColor: 'rgba(255, 255, 255, 0.5)', borderBottomLeftRadius: 4, borderBottomRightRadius: 4}}>{index+1}</Text>
             <Text style={{textAlign: 'center', fontWeight: 'bold', justifyContent: 'center', width: 150, fontSize: 18, color: 'white'}}>{item.name}</Text>
-            <Text style={{fontWeight: 'bold', textAlign: 'center', width: 30, fontSize: 18, color: 'green'}}>{item.totalPledge}</Text>
+            <Text style={{fontWeight: 'bold', textAlign: 'center', width: 30, fontSize: 18, color: 'green'}}>{item.totalPoint}</Text>
             <Text style={{fontWeight: 'bold', textAlign: 'center', width: 30, fontSize: 18, color: 'red'}}>{item.totalDrink}</Text>
         </View>
     );

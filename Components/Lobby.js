@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, TextInput, View, FlatList, Button, ImageBackground, TouchableOpacity, Image, Text } from 'react-native'
 import Player from './Player'
 import { connect } from 'react-redux'
-import { randomAvatar } from '../helpers/pledgeHelper'
+import { randomAvatar } from '../helpers/avatarHelper'
 
 class Lobby extends React.Component {
 
@@ -29,7 +29,7 @@ class Lobby extends React.Component {
         id: this.id,
         name: this.name,
         avatar: randomAvatar(),
-        totalPledge: 0,
+        totalPoint: 0,
         totalDrink: 0
       }
       const action = { type: "ADD_PLAYER", value: player }

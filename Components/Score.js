@@ -13,7 +13,7 @@ class Score extends React.Component {
         this.state = {
             players: cloneDeep(this.props.playerReducer.players)
         }
-        this.state.players.sort(compareValues('totalPledge', 'desc'))
+        this.state.players.sort(compareValues('totalPoint', 'desc'))
     }
 
     componentDidMount() {

@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native'
 import { connect } from 'react-redux'
+import { resetQuestionsDone } from '../helpers/pledgeHelper'
 
 class Rules extends React.Component {
 
@@ -13,7 +14,8 @@ class Rules extends React.Component {
     }
 
     _displayTheGame() {
-        this.props.navigation.navigate("Game", { typeGame: this.typeGame })
+        resetQuestionsDone();
+        this.props.navigation.navigate("Game", { typeGame: this.typeGame });
     }
 
     _switchGameType() {

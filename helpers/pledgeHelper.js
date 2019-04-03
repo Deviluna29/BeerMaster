@@ -1,12 +1,14 @@
 
 export function randomPledge(){
-    var num = Math.floor(Math.random() * 3);
+    var num = Math.floor(Math.random() * 4);
 
     if (num == 0) {
         return pledgesQuestions[Math.floor(Math.random() * pledgesQuestions.length)];
     } else if (num == 1) {
         return pledgesActions[Math.floor(Math.random() * pledgesActions.length)];
     } else if (num == 2) {
+        return pledgesActionsOnOther[Math.floor(Math.random() * pledgesActionsOnOther.length)];
+    } else if (num == 3) {
         return pledgesVerites[Math.floor(Math.random() * pledgesVerites.length)];
     } else {
         return []
@@ -20,10 +22,12 @@ export function randomAvatar(){
 
 const colorQuestion = "#29a7b6"
 const colorAction = "#d55122"
+const colorActionOnOther = "#631A86" 
 const colorVerite = "#38ba78"
 
 const iconQuestion = require('../assets/images/question.png')
 const iconAction = require('../assets/images/action.png')
+const iconActionOnOther =require('../assets/images/action2.png')
 const iconVerite = require('../assets/images/verite.png')
 
 const avatarList = [
@@ -92,13 +96,16 @@ const pledgesActions = [
     {id:1,name:"Action",desc:"Fais 3 fois le tour de la table",powerPledge: 1, powerDrink: 1, theme: colorAction, icon: iconAction},
     {id:2,name:"Action",desc:"Enlève 1 vêtement",powerPledge: 1, powerDrink: 1, theme: colorAction, icon: iconAction},
     {id:3,name:"Action",desc:"Embrasse ton gros orteil",powerPledge: 1, powerDrink: 1, theme: colorAction, icon: iconAction},
-    {id:4,name:"Action",desc:"Bois un verre d'eau chaude",powerPledge: 1, powerDrink: 1, theme: colorAction, icon: iconAction},
-    {id:5,name:"Action",desc:"Masse le dos de ton voisin pendant 1 minute ou 1 tour",powerPledge: 1, powerDrink: 1, theme: colorAction, icon: iconAction},
+    {id:4,name:"Action",desc:"Bois un verre d'eau chaude",powerPledge: 1, powerDrink: 1, theme: colorAction, icon: iconAction},    
     {id:6,name:"Action",desc:"Compte jusqu'à 20 en anglais",powerPledge: 1, powerDrink: 1, theme: colorAction, icon: iconAction},
     {id:7,name:"Action",desc:"Fais la poule pendant 10 sec et tu seras plus cool !",powerPledge: 1, powerDrink: 1, theme: colorAction, icon: iconAction},
     {id:8,name:"Action",desc:"Louche pendant 15 secondes",powerPledge: 1, powerDrink: 1, theme: colorAction, icon: iconAction},
     {id:9,name:"Action",desc:"Fais une galipette",powerPledge: 1, powerDrink: 1, theme: colorAction, icon: iconAction},
     {id:10,name:"Action",desc:"Imite ton voisin de droite",powerPledge: 1, powerDrink: 1, theme: colorAction, icon: iconAction}
+]
+
+const pledgesActionsOnOther = [
+    {id:0,name:"Action2",desc:"Masse le dos de 'name' pendant 1 minute ou 1 tour",powerPledge: 1, powerDrink: 1, theme: colorActionOnOther, icon: iconActionOnOther},
 ]
 
 const pledgesVerites = [

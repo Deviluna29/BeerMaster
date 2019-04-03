@@ -130,6 +130,30 @@ class Game extends React.Component {
       }      
     }
 
+    _renderPledge() {
+      if (this.state.pledge.name === "Action2") {
+        var SampleText = this.state.pledge.desc;
+        var NewText = SampleText.replace("'name'", this.state.players[this._randomPlayer()].name);
+        return (
+          <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 30, color: this.state.pledge.theme}}>{this.state.players[this.state.currentPlayer].name} : {NewText}</Text>
+        )
+      } else {
+        return (
+          <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 30, color: this.state.pledge.theme}}>{this.state.players[this.state.currentPlayer].name} : {this.state.pledge.desc}</Text>
+        )
+      }                
+    }
+
+    _randomPlayer() {
+      var indexPlayer = this.state.currentPlayer;
+      
+      while (indexPlayer === this.state.currentPlayer) {
+        indexPlayer = Math.floor(Math.random() * this.state.players.length);
+      }
+      
+      return indexPlayer;
+    }
+
     _renderResponse() {
       if (this.state.pledge.name === "Question" && this.state.responseDisplayed) {
         return (
@@ -203,7 +227,7 @@ class Game extends React.Component {
                 </View>
                 {/** JEU */}
                 <View style={styles.bottom_container}>
-                    <Text style={{ margin: 5, textAlign: 'center', textAlignVertical: 'center', fontSize: 30, color: this.state.pledge.theme}}>{this.state.players[this.state.currentPlayer].name} : {this.state.pledge.desc}</Text>
+                    {this._renderPledge()}
                     {this._renderResponse()}
                 </View>
 

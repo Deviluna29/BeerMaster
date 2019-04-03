@@ -69,7 +69,7 @@ class Rules extends React.Component {
                     <View style={{borderBottomWidth: 1, borderColor: '#F26157', marginBottom: 8}}>
                         <Text style={{fontWeight: 'bold', fontSize: 20, color: '#F26157'}}>Thèmes activés</Text>
                     </View>
-                    <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'space-between', width: '70%', margin: 5}}>                    
+                    <View style={{flexDirection: 'row', justifyContent: 'space-around', alignItems: 'space-between', width: '70%', margin: 5}}>                    
                           <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', borderWidth: 1, padding: 3, borderColor: '#29a7b6', borderRadius: 8, backgroundColor: 'rgba(0, 0, 0, 0.7)'}}>
                               <Text style={{marginRight: 5, fontWeight: 'bold', fontSize: 18, color: '#29a7b6'}}>Question</Text>
                               <Image style={{height: 25, width: 25}} source={require('../assets/images/question.png')} />                              
@@ -77,9 +77,13 @@ class Rules extends React.Component {
                           <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', borderWidth: 1, padding: 3, borderColor: '#d55122', borderRadius: 8, backgroundColor: 'rgba(0, 0, 0, 0.7)'}}>
                               <Text style={{marginRight: 5, fontWeight: 'bold', fontSize: 18, color: '#d55122'}}>Action</Text>
                               <Image style={{height: 25, width: 25}} source={require('../assets/images/action.png')} />
-                          </View> 
+                          </View>                          
                     </View>
-                    <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '70%', margin: 5, paddingBottom: 10, borderBottomWidth: 1, borderColor: 'grey'}}>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-around', alignItems: 'space-between', width: '70%', margin: 5, paddingBottom: 10, borderBottomWidth: 1, borderColor: 'grey'}}>
+                        <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', borderWidth: 1, padding: 3, borderColor: '#631A86', borderRadius: 8, backgroundColor: 'rgba(0, 0, 0, 0.7)'}}>
+                              <Text style={{marginRight: 5, fontWeight: 'bold', fontSize: 18, color: '#631A86'}}>Action2</Text>
+                              <Image style={{height: 25, width: 25}} source={require('../assets/images/action2.png')} />
+                          </View> 
                         <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', borderWidth: 1, padding: 3, borderColor: '#38ba78', borderRadius: 8, backgroundColor: 'rgba(0, 0, 0, 0.7)'}}>
                               <Text style={{marginRight: 5, fontWeight: 'bold', fontSize: 18, color: '#38ba78'}}>Vérité</Text>
                               <Image style={{height: 25, width: 25}} source={require('../assets/images/verite.png')} />
